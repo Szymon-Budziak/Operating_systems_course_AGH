@@ -19,7 +19,7 @@ void create_table(int size) {
 void wc_files(char *files[], int length) {
     static const char *wc = "wc ";
     static const char *tmp_file = "> tmp_file.txt";
-    int system_command;
+    static int system_command;
     strcat(command, wc);
     for (int i = 0; i < length; i++) {
         strcat(command, files[i]);
@@ -63,6 +63,10 @@ int save_in_memory() {
 }
 
 void remove_array() {
+    if (array == NULL || array->blocks == NULL) {
+        fprintf(stderr, "Array is already free");
+        return;
+    }
     int i;
     for (i = 0; i < array->size; i++) {
         if (array->blocks[i] != NULL) {
@@ -76,10 +80,14 @@ void remove_array() {
 
 
 void remove_block(int index) {
-    if (index < 0 || index >= array->size || array->blocks[index] == NULL)
+    if (index < 0 || index >= array->size || array->blocks[index] == NULL) {
         fprintf(stderr, "Wrong index.");
-    if (array->blocks[index] == NULL)
+        return;
+    }
+    if (array->blocks[index] == NULL) {
         fprintf(stderr, "No data at this index.");
+        return;
+    }
     free(array->blocks[index]->result);
     free(array->blocks[index]);
     array->blocks[index] = NULL;
