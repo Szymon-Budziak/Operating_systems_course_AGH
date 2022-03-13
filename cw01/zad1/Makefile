@@ -1,4 +1,4 @@
-CFLAGS = -Wall -std=c11 -ggdb -O2
+CFLAGS = -Wall -ggdb -O2
 
 all: static shared clean
 
