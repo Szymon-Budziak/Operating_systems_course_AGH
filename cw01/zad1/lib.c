@@ -3,8 +3,8 @@
 #include <string.h>
 #include "lib.h"
 
-wrapped_array *array;
-char command[100000];
+static wrapped_array *array;
+static char command[100000];
 
 void create_table(int size) {
     if (size <= 0) {
@@ -17,13 +17,13 @@ void create_table(int size) {
 }
 
 void wc_files(char *files[], int length) {
-    static const char *wc = "wc ";
-    static const char *tmp_file = "> tmp_file.txt";
+    static const char *wc = "wc";
+    static const char *tmp_file = " > tmp_file.txt";
     static int system_command;
     strcat(command, wc);
     for (int i = 0; i < length; i++) {
-        strcat(command, files[i]);
         strcat(command, " ");
+        strcat(command, files[i]);
     }
     strcat(command, tmp_file);
     system_command = system(command);
@@ -34,8 +34,8 @@ void wc_files(char *files[], int length) {
 int save_in_memory() {
     FILE *tmp_file;
     static unsigned int file_size;
-    int index, remove_tmp_file;
-    unsigned long fread_run;
+    static int index, remove_tmp_file;
+    static unsigned long fread_run;
 
     /* get size of tmp_file in which are saved wc results */
     tmp_file = fopen("tmp_file.txt", "r");
@@ -71,6 +71,7 @@ void remove_array() {
     for (i = 0; i < array->size; i++) {
         if (array->blocks[i] != NULL) {
             free(array->blocks[i]->result);
+            array->blocks[i]->result = NULL;
             free(array->blocks[i]);
             array->blocks[i] = NULL;
         }
@@ -84,11 +85,8 @@ void remove_block(int index) {
         fprintf(stderr, "Wrong index.");
         return;
     }
-    if (array->blocks[index] == NULL) {
-        fprintf(stderr, "No data at this index.");
-        return;
-    }
     free(array->blocks[index]->result);
+    array->blocks[index]->result = NULL;
     free(array->blocks[index]);
     array->blocks[index] = NULL;
 }
