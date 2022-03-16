@@ -1,30 +1,31 @@
+CC = gcc
 CFLAGS = -Wall -std=c11 -ggdb
 LIB_PATH = ../zad1
 TABLE_SIZE = 3
 
 static:
 	make -C ../zad1 static
-	gcc $(CFLAGS) main.c -o main -I$(LIB_PATH) $(LIB_PATH)/lib.a
+	$(CC) $(CFLAGS) main.c -o main -I$(LIB_PATH) $(LIB_PATH)/lib.a
 
 small_test:
-	@echo "***TEST ON SMALL FILES ***" >> raport2.txt
-	./main create_table $(TABLE_SIZE) wc_files test_files/small_file_1.txt test_files/small_file_2.txt remove_block 0 >> raport2.txt
+	@echo "***TEST ON SMALL FILES ***" | tee -a raport2.txt
+	./main create_table $(TABLE_SIZE) wc_files test_files/small_file_1.txt test_files/small_file_2.txt remove_block 0 | tee -a raport2.txt
 
 medium_test:
-	@echo "***TEST ON MEDIUM FILES ***" >> raport2.txt
-	./main create_table $(TABLE_SIZE) wc_files test_files/medium_file_1.txt test_files/medium_file_2.txt test_files/medium_file_3.txt remove_block 0 >> raport2.txt
+	@echo "***TEST ON MEDIUM FILES ***" | tee -a raport2.txt
+	./main create_table $(TABLE_SIZE) wc_files test_files/medium_file_1.txt test_files/medium_file_2.txt test_files/medium_file_3.txt remove_block 0 | tee -a raport2.txt
 
 large_test:
-	@echo "***TEST ON LARGE FILES ***" >> raport2.txt
-	./main create_table $(TABLE_SIZE) wc_files test_files/large_file_1.txt test_files/small_file_2.txt remove_block 0 >> raport2.txt
+	@echo "***TEST ON LARGE FILES ***" | tee -a raport2.txt
+	./main create_table $(TABLE_SIZE) wc_files test_files/large_file_1.txt test_files/small_file_2.txt remove_block 0 | tee -a raport2.txt
 
 different_test:
-	@echo "***TEST ON DIFFERENT FILES ***" >> raport2.txt
-	./main create_table $(TABLE_SIZE) wc_files test_files/small_file_3.txt test_files/medium_file_2.txt test_files/large_file_3.txt remove_block 0 >> raport2.txt
+	@echo "***TEST ON DIFFERENT FILES ***" | tee -a raport2.txt
+	./main create_table $(TABLE_SIZE) wc_files test_files/small_file_3.txt test_files/medium_file_2.txt test_files/large_file_3.txt remove_block 0 | tee -a raport2.txt
 
 mult_block_remove:
-	@echo "***TEST ON MULTIPLE BLOCK REMOVE ***" >> raport2.txt
-	./main create_table $(TABLE_SIZE) wc_files test_files/small_file_1.txt wc_files test_files/large_file_2.txt remove_block 0 wc_files test_files/medium_file_3.txt remove_block 0 remove_block 1 >> raport2.txt
+	@echo "***TEST ON MULTIPLE BLOCK REMOVE ***" | tee -a raport2.txt
+	./main create_table $(TABLE_SIZE) wc_files test_files/small_file_1.txt wc_files test_files/large_file_2.txt remove_block 0 wc_files test_files/medium_file_3.txt remove_block 0 remove_block 1 | tee -a raport2.txt
 
 run_all_tests:
 	rm -rf raport2.txt
