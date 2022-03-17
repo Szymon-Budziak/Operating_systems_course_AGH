@@ -35,10 +35,15 @@ different_test:
 	./main create_table $(TABLE_SIZE) wc_files $(TEST_PATH)/test_files/small_file_3.txt $(TEST_PATH)/test_files/medium_file_2.txt \
 	$(TEST_PATH)/test_files/large_file_3.txt remove_block 0 >> results3a.txt
 
-mult_block_remove:
+mult_block_remove_test:
 	@echo "***TEST ON MULTIPLE BLOCK REMOVE ***" >> results3a.txt
 	./main create_table $(TABLE_SIZE) wc_files $(TEST_PATH)/test_files/small_file_1.txt wc_files $(TEST_PATH)/test_files/large_file_2.txt \
 	remove_block 0 wc_files $(TEST_PATH)/test_files/medium_file_3.txt remove_block 0 >> results3a.txt
+
+data_leakage_test:
+	@echo "***TEST ON DATA LEAKAGE***" >> results3a.txt
+	valgrind -s --leak-check=full --show-leak-kinds=all ./main create_table $(TABLE_SIZE) wc_files $(TEST_PATH)/test_files/small_file_1.txt \
+	$(TEST_PATH)/test_files/medium_file_2.txt $(TEST_PATH)/test_files/large_file_1.txt remove_block 0 >> results3a.txt
 
 run_all_tests:
 	rm -rf results3a.txt
@@ -46,7 +51,8 @@ run_all_tests:
 	make medium_test
 	make large_test
 	make different_test
-	make mult_block_remove
+	make mult_block_remove_test
+	make data_leakage_test
 
 clean:
 	rm -rf main results3a.txt tmp_file.txtwc
@@ -67,7 +73,8 @@ help:
 	@echo "To run test on medium files: make medium_test"
 	@echo "To run test on large files: make large_test"
 	@echo "To run test on different files: make different_test"
-	@echo "To run multiple block removes: make mult_block_remove"
+	@echo "To run multiple block removes: make mult_block_remove_test"
+	@echo "To check if there are any data leakage: run data_leakage_test"
 	@echo "To run all tests at once: make run_all_tests"
 	@echo "To clean all not necessary files (it cleans zad1, zad2 and zad3 directory): make clean"
 	@echo "To clean content of results3a.txt file: make clean_results"

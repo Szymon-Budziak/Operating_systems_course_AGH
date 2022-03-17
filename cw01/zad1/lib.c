@@ -4,7 +4,7 @@
 #include "lib.h"
 
 static wrapped_array *array;
-static char command[100000];
+static char *command;
 
 void create_table(int size) {
     if (size <= 0) {
@@ -17,6 +17,7 @@ void create_table(int size) {
 }
 
 void wc_files(char *files[], int length) {
+    command = calloc(100000, sizeof(char));
     static const char *wc = "wc";
     static const char *tmp_file = " > tmp_file.txt";
     static int system_command;
@@ -29,6 +30,7 @@ void wc_files(char *files[], int length) {
     system_command = system(command);
     if (system_command == -1)
         fprintf(stderr, "Wrong command");
+    free(command);
 }
 
 int save_in_memory() {
@@ -76,6 +78,7 @@ void remove_array() {
             array->blocks[i] = NULL;
         }
     }
+    free(array->blocks);
     free(array);
 }
 
