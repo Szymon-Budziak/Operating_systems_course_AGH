@@ -3,13 +3,10 @@
 #include <sys/times.h>
 #include <string.h>
 #include <unistd.h>
+#include "../zad1/lib.h"
 
 #ifdef DYNAMIC
 #include <dlfcn.h>
-#else
-
-#include "../zad1/lib.h"
-
 #endif
 
 static clock_t start_time, end_time;
@@ -20,27 +17,6 @@ static struct tms additional_start_time_buffer, additional_end_time_buffer;
 double calculate_time(clock_t start, clock_t end) {
     return (double) (end - start) / (double) sysconf(_SC_CLK_TCK);
 }
-
-//void load_dynamic_library(lib_handle) {
-//    if (!lib_handle) {
-//        fprintf(stderr, "Cannot load a file");
-//        exit(1);
-//    }
-//    void (*create_table)(int);
-//    void (*wc_files)(char **, int);
-//    int (*save_in_memory)(void);
-//    void (*remove_array)(void);
-//    void (*remove_block)(int);
-//    create_table = (void (*)(int)) dlsym(lib_handle, "create_table");
-//    wc_files = (void (*)(char **, int)) dlsym(lib_handle, "wc_files");
-//    save_in_memory = (int (*)(void)) dlsym(lib_handle, "save_in_memory");
-//    remove_array = (void (*)(void)) dlsym(lib_handle, "remove_array");
-//    remove_block = (void (*)(int)) dlsym(lib_handle, "remove_block");
-//    if (dlerror() != NULL) {
-//        fprintf(stderr, "Cannot load lib file");
-//        exit(1);
-//    }
-//}
 
 void print_result(clock_t s_time, clock_t e_time, struct tms s_buffer, struct tms e_buffer, char name[]) {
     printf("[REAL TIME] %s execution took %fs\n"
@@ -54,7 +30,24 @@ void print_result(clock_t s_time, clock_t e_time, struct tms s_buffer, struct tm
 int main(int argc, char *argv[]) {
 #ifdef DYNAMIC
     void *lib_handle = dlopen("../zad1/lib.so", RTLD_LAZY);
-    load_dynamic_library(lib_handle);
+    if (!lib_handle) {
+        fprintf(stderr, "Cannot load a file");
+        exit(1);
+    }
+    void (*create_table)(int);
+    void (*wc_files)(char **, int);
+    int (*save_in_memory)(void);
+    void (*remove_array)(void);
+    void (*remove_block)(int);
+    create_table = (void (*)(int)) dlsym(lib_handle, "create_table");
+    wc_files = (void (*)(char **, int)) dlsym(lib_handle, "wc_files");
+    save_in_memory = (int (*)(void)) dlsym(lib_handle, "save_in_memory");
+    remove_array = (void (*)(void)) dlsym(lib_handle, "remove_array");
+    remove_block = (void (*)(int)) dlsym(lib_handle, "remove_block");
+    if (dlerror() != NULL) {
+        fprintf(stderr, "Cannot load lib file");
+        exit(1);
+    }
 #endif
 
     int i, size, arg_length, index;
