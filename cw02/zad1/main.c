@@ -125,6 +125,7 @@ int main(int argc, char *argv[]) {
     // lib
     start_time = times(&start_time_buffer);
     lib_open_file(filename_1, filename_2);
+
     end_time = times(&end_time_buffer);
     print_result("lib", results);
 
