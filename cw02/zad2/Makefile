@@ -12,3 +12,8 @@ run_valgrind_test:
 clean:
 	rm -rf main
 	> pomiar_zad_2.txt
+
+help:
+	@echo "To compile and run example test on test_file.txt from test_files and find j occurrences: make run_test"
+	@echo "To compile and run example test on test_file.txt from test_files, find j occurrences and check if there are any data leakage: make run_valgrind_test"
+	@echo "To clean all not necessary files: make clean"
