@@ -6,7 +6,7 @@ DEPTH = 10
 
 run_example_test:
 	$(CC) $(CFLAGS) main.c -o main
-	./main /home/szymon/Studia_AGH/Semestr_4 "Try to find me :)" 10
+	./main /home/szymon/Studia_AGH "Try to find me :)" 10
 
 run_test:
 	$(CC) $(CFLAGS) main.c -o main
