@@ -20,8 +20,9 @@ clean:
 	rm -rf main
 
 help:
-	@echo "To compile and run example test with substring 'see' and depth 10: make run_example_test"
-	@echo "To compile and run test with optional argument: make run_test S_PATH='ARG1' SUBSTRING='ARG2' DEPTH='ARG3'"
-	@echo "\t (where 'ARG1' path to the folder you want to start, 'ARG2' is a substring that you are looking for and 'ARG3' is max depth)"
+	@echo "To compile and run example test with substring 'Try to find me :)' and depth 10: make run_example_test"
+	@echo "To compile and run test with optional arguments: make run_test S_PATH='ARG1' SUBSTRING='ARG2' DEPTH='ARG3'"
+	@echo "\t (where 'ARG1' path to the folder you want to start, 'ARG2' is a substring that you are looking for and 'ARG3' is max depth"
+	@echo "\t this arguments has default values: S_PATH = /home/szymon/Studia_AGH, SUBSTRING = 'Try to find me :)', DEPTH = 10"
 	@echo "To compile and run test to check if there are any data leakage: make run_valgrind_test"
 	@echo "To clean all not necessary files: make clean"
