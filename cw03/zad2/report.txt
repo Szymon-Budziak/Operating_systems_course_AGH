@@ -1,0 +1,4 @@
+[REAL TIME] execution took 9.310000s
+[USER TIME] execution took 0.000000s
+[SYSTEM TIME] execution took 0.000000s
+Integral result: 3.141587
