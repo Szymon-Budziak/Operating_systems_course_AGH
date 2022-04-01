@@ -1,0 +1,49 @@
+WNIOSKI:]
+  a) fork:
+    - proces potomny dziedziczy po przodku ustawienia po wywołaniu: ignore, handler, mask,
+    - w przypadku wywołania pending sygnał oczekujący nie jest widoczny w przodku,
+  b) exec:
+    - proces potomny dziedziczy po przodku ustawienia po wywołaniu: ignore, mask oraz pending,
+    - handler w tym przypadku jest ustawiony na domyślny, co kończy się zakończeniem programu w przypadku SIGUSR1,
+    - sygnał oczekujący w przodku jest także widoczny w potomku (w przeciwieństwie do fork),
+    - sygnał obługiwany zaczyna być ignorowany po wywołaniu,
+    -sygnały ignorowane są dalej ignorowane po wywołaniu,
+
+  - w obydwu przypadkach sygnał wysłany i zablokowany w procesie macierzystym nie jest widoczny jako oczekujący w procesie potomnym,
+
+PRZYKŁADOWY OUTPUT:
+  a) fork:
+---TESTING ignore---
+Raising signal in main process...
+Raising signal in child process...
+---TESTING handler---
+Raising signal in main process...
+Received signal 10. PID: 8499, PPID: 8498
+Raising signal in child process...
+Received signal 10. PID: 8500, PPID: 8499
+---TESTING mask---
+Raising signal in main process...
+Signal is pending. PID: 8532
+Raising signal in child process...
+Signal is pending in child process. PID: 8533
+---TESTING pending---
+Raising signal in main process...
+Signal is pending. PID: 8585
+Signal is not pending in child process. PID: 8586
+
+  b) exec:
+---TESTING ignore---
+Raising signal in main process...
+Calling execl...
+Raising signal in child process...
+---TESTING mask---
+Raising signal in main process...
+Signal is pending. PID: 9382
+Calling execl...
+Raising signal in child process...
+Signal is pending in child process. PID: 9382
+---TESTING pending---
+Raising signal in main process...
+Signal is pending. PID: 9444
+Calling execl...
+Signal is pending in child process. PID: 9444
