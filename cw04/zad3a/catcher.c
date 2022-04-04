@@ -14,32 +14,32 @@ void handler1(int sig) {
 void handler2(int sig, siginfo_t *info, void *ucontext) {
     printf("Catcher received SIGUSR2. Now it is going to send back %d SIGUSR1 signals\n", count);
 
-    pid_t PID_sender;
-    PID_sender = info->si_pid;
+    pid_t sender_PID;
+    sender_PID = info->si_pid;
 
     // send SIGUSR1 signals
     for (int i = 0; i < count; i++) {
         printf("%d SIGUSR1 signal sent back\n", i + 1);
         if (strcmp(mode, "KILL") == 0) {
-            kill(PID_sender, SIGUSR1);
+            kill(sender_PID, SIGUSR1);
         } else if (strcmp(mode, "SIGQUEUE") == 0) {
             union sigval value;
             value.sival_int = i;
-            sigqueue(PID_sender, SIGUSR1, value);
+            sigqueue(sender_PID, SIGUSR1, value);
         } else if (strcmp(mode, "SIGRT") == 0) {
-            kill(PID_sender, SIGRTMIN + 1);
+            kill(sender_PID, SIGRTMIN + 1);
         } else
             printf("Wrong argument\n");
     }
 
     // send SIGUSR2 signals
     if (strcmp(mode, "KILL") == 0) {
-        kill(PID_sender, SIGUSR2);
+        kill(sender_PID, SIGUSR2);
     } else if (strcmp(mode, "SIGQUEUE") == 0) {
         union sigval value;
-        sigqueue(PID_sender, SIGUSR2, value);
+        sigqueue(sender_PID, SIGUSR2, value);
     } else if (strcmp(mode, "SIGRT") == 0) {
-        kill(PID_sender, SIGRTMIN + 2);
+        kill(sender_PID, SIGRTMIN + 2);
     } else
         printf("Wrong argument\n");
     exit(0);

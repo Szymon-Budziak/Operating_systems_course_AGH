@@ -27,10 +27,10 @@ int main(int argc, char *argv[]) {
         perror("Wrong number of arguments\n");
         exit(1);
     }
-    int PID_catcher;
+    int catcher_PID;
 
-    if ((PID_catcher = atoi(argv[1])) < 1) {
-        perror("Invalid PID catcher\n");
+    if ((catcher_PID = atoi(argv[1])) < 1) {
+        perror("Invalid PID catcher_PID\n");
         exit(1);
     }
     if ((signals_number = atoi(argv[2])) < 1) {
@@ -70,12 +70,12 @@ int main(int argc, char *argv[]) {
     printf("%d SIGUSR1 signals will be sent\n", signals_number);
     for (int i = 0; i < signals_number; ++i) {
         if (strcmp(mode, "KILL") == 0) {
-            kill(PID_catcher, SIGUSR1);
+            kill(catcher_PID, SIGUSR1);
         } else if (strcmp(mode, "SIGQUEUE") == 0) {
             union sigval value;
-            sigqueue(PID_catcher, SIGUSR1, value);
+            sigqueue(catcher_PID, SIGUSR1, value);
         } else if (strcmp(mode, "SIGRT") == 0) {
-            kill(PID_catcher, SIGRTMIN + 1);
+            kill(catcher_PID, SIGRTMIN + 1);
         } else
             printf("Wrong argument\n");
     }
@@ -84,12 +84,12 @@ int main(int argc, char *argv[]) {
 
     // send SIGUSR2 signals
     if (strcmp(mode, "KILL") == 0) {
-        kill(PID_catcher, SIGUSR2);
+        kill(catcher_PID, SIGUSR2);
     } else if (strcmp(mode, "SIGQUEUE") == 0) {
         union sigval value;
-        sigqueue(PID_catcher, SIGUSR2, value);
+        sigqueue(catcher_PID, SIGUSR2, value);
     } else if (strcmp(mode, "SIGRT") == 0) {
-        kill(PID_catcher, SIGRTMIN + 2);
+        kill(catcher_PID, SIGRTMIN + 2);
     } else
         printf("Wrong argument\n");
 
