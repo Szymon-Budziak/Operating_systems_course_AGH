@@ -64,7 +64,6 @@ int main(int argc, char *argv[]) {
             perror("Sigaction error\n");
     }
 
-
     // send SIGUSR1 signals
     printf("%d SIGUSR1 signals will be sent\n", signals_number);
     for (int i = 0; i < signals_number; ++i) {
@@ -81,7 +80,7 @@ int main(int argc, char *argv[]) {
 
     printf("All %d SIGUSR1 signals sent\n", signals_number);
 
-    // send SIGUSR2 signals
+    // send SIGUSR2 signal
     if (strcmp(mode, "KILL") == 0) {
         kill(catcher_PID, SIGUSR2);
     } else if (strcmp(mode, "SIGQUEUE") == 0) {
