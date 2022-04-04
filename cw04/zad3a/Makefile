@@ -8,7 +8,7 @@ compile_programs:
 	$(CC) $(CFLAGS) sender.c -o sender
 
 run_test: compile_programs
-	./catcher $(ARG) &
+	./catcher $(ARG2) &
 	./sender `pidof catcher` $(ARG1) $(ARG2)
 
 clean:
