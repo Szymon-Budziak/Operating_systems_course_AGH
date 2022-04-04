@@ -11,14 +11,14 @@ char *mode;
 void handler1(int sig, siginfo_t *info, void *ucontext) {
     count++;
     if (strcmp(mode, "SIGQUEUE") == 0) {
-        printf("SIGUSR1 handler caught signal\n");
-        printf("Number of signals caught and sent back from catcher: %d\n", info->si_value.sival_int);
+        printf("Sender received SIGUSR1 signal\n");
+        printf("Sender received %d signals caught and sent back from catcher\n", info->si_value.sival_int);
     }
 }
 
-void handler2(int sig, siginfo_t *info, void *ucontext) {
-    printf("***All signals sent back***\n");
-    printf("All SIGUSR1 signals caught by sender: %d and should be %d\n", count, signals_number);
+void handler2(int sig) {
+    printf("Sender received SIGUSR2 signal from catcher\n");
+    printf("Sender received %d SIGUSR1 signals back and should received %d signals\n", count, signals_number);
     exit(0);
 }
 
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
 
     // SIGUSR2
     static struct sigaction sig2;
-    sig2.sa_sigaction = handler2;
+    sig2.sa_handler = handler2;
     sigemptyset(&sig2.sa_mask);
 
     if (strcmp(mode, "SIGRT") != 0) {
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
     }
 
     // send SIGUSR1 signals
-    printf("%d SIGUSR1 signals will be sent\n", signals_number);
+    printf("Sender sending %d SIGUSR1 signals to catcher\n", signals_number);
     for (int i = 0; i < signals_number; ++i) {
         if (strcmp(mode, "KILL") == 0) {
             kill(catcher_PID, SIGUSR1);
@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
             printf("Wrong argument\n");
     }
 
-    printf("All %d SIGUSR1 signals sent\n", signals_number);
+    printf("Sender sent all %d SIGUSR1 signals to catcher\n", signals_number);
 
     // send SIGUSR2 signal
     if (strcmp(mode, "KILL") == 0) {
@@ -90,6 +90,6 @@ int main(int argc, char *argv[]) {
         kill(catcher_PID, SIGRTMIN + 2);
     } else
         printf("Wrong argument\n");
-
+    printf("Sender sent SIGUSR2 signal to catcher\n");
     while (1);
 }

@@ -12,7 +12,8 @@ void handler1(int sig) {
 }
 
 void handler2(int sig, siginfo_t *info, void *ucontext) {
-    printf("Catcher received SIGUSR2. Now it is going to send back %d SIGUSR1 signals\n", count);
+    printf("Catcher received SIGUSR2 signal from sender\n");
+    printf("Catcher sending %d SIGUSR1 signals back to sender\n", count);
 
     pid_t sender_PID;
     sender_PID = info->si_pid;
@@ -31,6 +32,7 @@ void handler2(int sig, siginfo_t *info, void *ucontext) {
         } else
             printf("Wrong argument\n");
     }
+    printf("Catcher sent all %d SIGUSR1 signals to sender\n", count);
 
     // send SIGUSR2 signal
     if (strcmp(mode, "KILL") == 0) {
@@ -42,6 +44,7 @@ void handler2(int sig, siginfo_t *info, void *ucontext) {
         kill(sender_PID, SIGRTMIN + 2);
     } else
         printf("Wrong argument\n");
+    printf("Catcher sent SIGUSR2 signal to sender\n");
     exit(0);
 }
 
