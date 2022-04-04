@@ -32,7 +32,7 @@ void handler2(int sig, siginfo_t *info, void *ucontext) {
             printf("Wrong argument\n");
     }
 
-    // send SIGUSR2 signals
+    // send SIGUSR2 signal
     if (strcmp(mode, "KILL") == 0) {
         kill(sender_PID, SIGUSR2);
     } else if (strcmp(mode, "SIGQUEUE") == 0) {
@@ -56,6 +56,7 @@ int main(int argc, char *argv[]) {
     // SIGUSR1
     static struct sigaction sig1;
     sig1.sa_handler = handler1;
+    sig1.sa_flags = SA_SIGINFO;
     sigemptyset(&sig1.sa_mask);
 
     // SIGUSR2

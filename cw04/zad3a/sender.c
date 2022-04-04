@@ -41,7 +41,6 @@ int main(int argc, char *argv[]) {
 
     printf("Sender with PID: %d\n", getpid());
 
-
     // SIGUSR1
     static struct sigaction sig1;
     sig1.sa_sigaction = handler1;
