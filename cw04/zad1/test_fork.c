@@ -45,9 +45,8 @@ int main(int argc, char *argv[]) {
         // Adding signal to the set
         sigaddset(&signal_set, SIGUSR1);
         // Blocking each signal in the set
-        if (sigprocmask(SIG_BLOCK, &signal_set, NULL) != 0) {
+        if (sigprocmask(SIG_BLOCK, &signal_set, NULL) < 0)
             perror("Signal blocking failed\n");
-        }
 
         fprintf(stdout, "Raising signal in main process...\n");
         raise(SIGUSR1);

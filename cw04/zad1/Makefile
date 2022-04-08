@@ -32,6 +32,15 @@ run_test_exec_pending:
 	$(CC) $(CFLAGS) child.c -o child
 	./test_exec "pending"
 
+run_all:
+	make run_test_fork_ignore
+	make run_test_fork_handler
+	make run_test_fork_mask
+	make run_test_fork_pending
+	make run_test_exec_ignore
+	make run_test_exec_mask
+	make run_test_exec_pending
+
 clean:
 	rm -rf test_fork test_exec child
 
