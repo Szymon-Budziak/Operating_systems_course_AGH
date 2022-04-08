@@ -88,7 +88,8 @@ int main(int argc, char *argv[]) {
         sigdelset(&signal_set, SIGRTMIN + 1);
         sigdelset(&signal_set, SIGRTMIN + 2);
     }
-    sigprocmask(SIG_SETMASK, &signal_set, NULL);
+    if (sigprocmask(SIG_SETMASK, &signal_set, NULL) < 0)
+        perror("Signal blocking failed\n");
     while (1) {
         sigsuspend(&signal_set);
     }
