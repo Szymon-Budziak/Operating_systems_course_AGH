@@ -3,7 +3,7 @@ WNIOSKI:
     - proces potomny dziedziczy po przodku ustawienia po wywołaniu: ignore, handler, mask,
     - w przypadku wywołania pending sygnał oczekujący nie jest widoczny w przodku,
   b) exec:
-    - proces potomny dziedziczy po przodku ustawienia po wywołaniu: ignore, mask oraz pending,
+    - proces potomny dziedziczy po przodku ustawienia po wywołaniu: ignore, mask, pending,
     - handler w tym przypadku jest ustawiony na domyślny, co kończy się zakończeniem programu w przypadku SIGUSR1,
     - sygnał oczekujący w przodku jest także widoczny w potomku (w przeciwieństwie do fork),
     - sygnał obługiwany zaczyna być ignorowany po wywołaniu,
