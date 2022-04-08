@@ -16,7 +16,7 @@ void nocldstop_handler(int sig, siginfo_t *info, void *ucontext) {
     printf("Signal number: %d, PID: %d, PPID: %d\n", sig, info->si_pid, getppid());
 }
 
-void resthand_handler(int sig) {
+void resethand_handler(int sig) {
     printf("Entering SA_RESETHAND handler\n");
     printf("Signal number: %d, PID: %d, PPID: %d\n", sig, getpid(), getppid());
 }
@@ -73,17 +73,17 @@ void test_sa_nocldstop() {
 }
 
 void test_sa_resethand() {
-    printf("-----TESTING SA_RESTHAND-----\n");
+    printf("-----TESTING SA_RESETHAND-----\n");
     static struct sigaction sig;
-    sig.sa_handler = resthand_handler;
+    sig.sa_handler = resethand_handler;
     sigemptyset(&sig.sa_mask);
     if (sigaction(SIGCHLD, &sig, NULL) == -1)
         perror("Sigaction error\n");
 
-    printf("SA_RESTHAND not set yet\n");
+    printf("SA_RESETHAND not set yet\n");
     send_signal_to_child(SIGSTOP);
 
-    printf("SA_RESTHAND set\n");
+    printf("SA_RESETHAND set\n");
     sig.sa_flags = SA_RESETHAND;
     send_signal_to_child(SIGSTOP);
 }
@@ -96,6 +96,6 @@ int main(int argc, char *argv[]) {
     // SA_NOCLDSTOP
     test_sa_nocldstop();
 
-    // SA_RESTHAND
+    // SA_RESETHAND
     test_sa_resethand();
 }
