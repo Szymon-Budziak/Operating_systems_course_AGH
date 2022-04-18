@@ -1,0 +1,30 @@
+WNIOSKI:
+
+Dla wszystkich testowanych przypadków, czyli:
+
+1) wielu producentów, jeden konsument
+2) jeden producenta, wielu konsumentów
+3) wielu producentów, wielu konsumentów
+
+Na poniższych testach, możemy zauwaźyć, że nie dochodzi do utraty ani do zwielokrotnienia towaru. Dane otrzymane
+od i-tego producenta są prawidłowo umieszczone w i-tym wierszy pliku wynikowego. Dodatkowo cała zawartość pliku
+wejścioswego pojawia się w pliku wyjściowym. Wyniki po wykonaniu testów są poprawne. Uruchamiając program z lini
+komend można zauważyć iż potoki nazwane działają dla niezależnych procesów.
+
+Poniższe testy zostały wykonane dla N = 5.
+=====TEST 5 - 1, N = 5=====
+1234567890
+ABCDEFGHIJ
+QWERTYUIOP
+1234567890asdfg
+qwertyuiopzxcvb
+
+=====TEST 1 - 5, N = 5=====
+1234567890
+
+=====TEST 5 - 5, N = 5=====
+1234567890
+ABCDEFGHIJ
+QWERTYUIOP
+1234567890asdfg
+qwertyuiopzxcvb
