@@ -1,0 +1,12 @@
+składnik1 = cat /etc/passwd
+składnik2 = ls -al
+składnik3 = wc -l
+składnik4 = pwd
+składnik5 = ps aux | head -10
+
+składnik1 | składnik3 | składnik2
+składnik1
+składnik4
+składnik5
+składnik5 | składnik3
+składnik1 | składnik3
