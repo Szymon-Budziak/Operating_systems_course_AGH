@@ -1,0 +1,95 @@
+Date is: 2022/05/3.
+Time is 23:32:42.
+Message send by sender with 0 id.
+Text of the message: 67305474
+-----------------------
+Date is: 2022/05/3.
+Time is 23:32:46.
+Message send by sender with 0 id.
+Text of the message: 318963714
+-----------------------
+Date is: 2022/05/3.
+Time is 23:32:52.
+Message send by sender with 9 id.
+Text of the message: hello
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:00.
+Message send by sender with 8 id.
+Text of the message: hello client
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:05.
+Message send by sender with 9 id.
+Text of the message: hello
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:05.
+Message send by sender with 9 id.
+Text of the message: 
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:10.
+Message send by sender with 8 id.
+Text of the message: 
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:13.
+Message send by sender with 0 id.
+Text of the message: 1694695426
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:17.
+Message send by sender with 9 id.
+Text of the message: 
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:26.
+Message send by sender with 0 id.
+Text of the message: -1962737662
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:29.
+Message send by sender with 7 id.
+Text of the message: 
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:31.
+Message send by sender with 9 id.
+Text of the message: 8
+9
+
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:31.
+Message send by sender with 9 id.
+Text of the message:  D™¶Z
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:43.
+Message send by sender with 8 id.
+Text of the message: hello client 7
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:47.
+Message send by sender with 8 id.
+Text of the message: hello client 7
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:47.
+Message send by sender with 8 id.
+Text of the message:  \¿[
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:49.
+Message send by sender with 7 id.
+Text of the message: 7
+8
+9
+
+-----------------------
+Date is: 2022/05/3.
+Time is 23:33:49.
+Message send by sender with 7 id.
+Text of the message:  )Q¤
+-----------------------
