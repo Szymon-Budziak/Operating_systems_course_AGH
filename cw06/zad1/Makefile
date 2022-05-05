@@ -17,5 +17,4 @@ help:
 	@echo "	'2ONE 8 hello client'"
 	@echo "	'LIST '"
 	@echo "	'STOP '"
-	@echo "There has to be a space after LIST and STOP command."
 	@echo "To clean all not necessary files: make clean."
