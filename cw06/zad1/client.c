@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
         perror("ERROR! An error occurred while creating client key.\n");
         exit(1);
     }
-    if ((client_queue = msgget(client_key, IPC_CREAT | 0666)) == -1) { // TODO: IPC_EXCL
+    if ((client_queue = msgget(client_key, IPC_CREAT | IPC_EXCL | 0666)) == -1) {
         perror("ERROR! An error occurred while creating client queue.\n");
         exit(1);
     }
@@ -80,7 +80,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
     msg_buffer new_message;
-    if (msgrcv(client_queue, &new_message, MSG_SIZE, INIT, 0) == -1) {// TODO: init -> -7
+    if (msgrcv(client_queue, &new_message, MSG_SIZE, INIT, 0) == -1) {
         perror("ERROR! An error occurred while receiving a message in client.\n");
         exit(1);
     }

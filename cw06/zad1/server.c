@@ -180,7 +180,7 @@ void to_one_action(int sender_id, int receiver_id, char *message) {
     new_message.m_type = _2ONE;
     new_message.sender_id = sender_id;
     new_message.receiver_id = receiver_id;
-    new_message.send_time = time(NULL); // TODO 0 here?
+    new_message.send_time = time(0);
     strcpy(new_message.m_text, message);
     if (msgsnd(connected_clients[receiver_id], &new_message, MSG_SIZE, 0) == -1) {
         perror("ERROR! An error occurred while sending a message to client.\n");
