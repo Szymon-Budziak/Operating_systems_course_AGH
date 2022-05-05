@@ -15,6 +15,6 @@ help:
 	@echo "Examples of commands:"
 	@echo "	'2ALL hello'"
 	@echo "	'2ONE 8 hello client'"
-	@echo "	'LIST '"
-	@echo "	'STOP '"
+	@echo "	'LIST'"
+	@echo "	'STOP'"
 	@echo "To clean all not necessary files: make clean."
