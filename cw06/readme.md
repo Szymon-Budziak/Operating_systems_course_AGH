@@ -40,7 +40,7 @@ Rodzaje zleceń
   jego kolejkę. Następnie kończy pracę, usuwając swoją kolejkę. Komunikat ten wysyłany jest również, gdy po stronie
   klienta zostanie wysłany sygnał SIGINT.
 
-- Serwer powinien zapisywać do pliku czas otrzymania zlecenia, identyfikator klienta i treść komunikatu.
+Serwer powinien zapisywać do pliku czas otrzymania zlecenia, identyfikator klienta i treść komunikatu.
 
 Zlecenia powinny być obsługiwane zgodnie z priorytetami,najwyższy priorytet ma STOP, potem LIST i reszta. Można tego
 dokonać poprzez sterowanie parametrem MTYPE w funkcji msgsnd. Poszczególne rodzaje komunikatów należy identyfikować za
