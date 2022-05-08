@@ -1,0 +1,50 @@
+Date is: 2022/05/8.
+Time is 18:26:33.
+Message send by sender with 3 id.
+Text of the message: /szymon40545
+-----------------------
+Date is: 2022/05/8.
+Time is 18:26:36.
+Message send by sender with 3 id.
+Text of the message: /szymon40559
+-----------------------
+Date is: 2022/05/8.
+Time is 18:26:43.
+Message send by sender with 8 id.
+Text of the message: Hello all
+-----------------------
+Date is: 2022/05/8.
+Time is 18:26:59.
+Message send by sender with 9 id.
+Text of the message: Hi man
+-----------------------
+Date is: 2022/05/8.
+Time is 18:27:05.
+Message send by sender with 8 id.
+Text of the message: Hello all
+-----------------------
+Date is: 2022/05/8.
+Time is 18:27:50.
+Message send by sender with 9 id.
+Text of the message: I am logging off
+-----------------------
+Date is: 2022/05/8.
+Time is 18:28:01.
+Message send by sender with 8 id.
+Text of the message: Ok see you
+-----------------------
+Date is: 2022/05/8.
+Time is 18:28:03.
+Message send by sender with 9 id.
+Text of the message: P
+-----------------------
+Date is: 2022/05/8.
+Time is 18:28:06.
+Message send by sender with 8 id.
+Text of the message: Ok see you
+-----------------------
+Date is: 2022/05/8.
+Time is 18:28:08.
+Message send by sender with 8 id.
+Text of the message: P
+-----------------------
