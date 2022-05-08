@@ -269,6 +269,6 @@ void handle_msg_control() {
             print_message(message);
             break;
         default:
-            fprintf(stderr, "ERROR! An error occurred: there is no such type of message.\n> ");
+            fprintf(stderr, "ERROR! An error occurred: there is no such type of message.\n");
     }
 }
