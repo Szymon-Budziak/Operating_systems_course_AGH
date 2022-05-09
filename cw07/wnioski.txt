@@ -1,0 +1,432 @@
+Program działa poprawnie dla wszystkich wartości N i M, które zostały przetestowane.
+
+Semafory pozwoliły na blokowanie procesów, ponieważ bez takiej możliwości skutkowało to przekraczaniem limitów pizz
+w piecu oraz na stole. Również semafory pozwoliły zapewnić wyłączność w modyfikacji do pamięci współdzielonej przez
+procesy. Bez tego wiele procesów mogłoby mieć jednoczesny dostęp do modyfikacji, co mogłoby być powodem możliwych
+zakleszczeń oraz zagłodzeń procesów.
+
+Poniżej znajdują się fragmenty testów dla różnych wartości N i M oraz dla różnych wariantów: System V i Posix.
+Wnioski jakie można wyciągnąć z poniższych testów, to niezależnie od wartości N i M, czy były one mniejsze od 5
+czy większe od 5, liczba pizz w piecu i na stole nigdy nie przekroczyła limitu.
+
+-------------------------------------------------------------------------------
+
+1. System V:
+
+N = 3 i M = 5
+===============================================================================
+(pid: 23233, timestamp: 2022-05-10 00:03:13:100)         Przygotowuje pizze: 1
+(pid: 23234, timestamp: 2022-05-10 00:03:13:100)         Przygotowuje pizze: 2
+(pid: 23232, timestamp: 2022-05-10 00:03:13:101)         Przygotowuje pizze: 6
+(pid: 23233, timestamp: 2022-05-10 00:03:14:100)         Dodano pizee: 1. Liczba pizz w piecu: 1.
+(pid: 23234, timestamp: 2022-05-10 00:03:14:100)         Dodano pizee: 2. Liczba pizz w piecu: 2.
+(pid: 23232, timestamp: 2022-05-10 00:03:14:101)         Dodano pizee: 6. Liczba pizz w piecu: 3.
+(pid: 23233, timestamp: 2022-05-10 00:03:18:100)         Wyjęto pizee: 1. Liczba pizz w piecu: 2. Liczba pizz na stole: 0.
+(pid: 23233, timestamp: 2022-05-10 00:03:18:100)         Pizza umieszczona na stole: 1. Liczba pizz w piecu: 2. Liczba pizz na stole: 1.
+(pid: 23233, timestamp: 2022-05-10 00:03:18:100)         Przygotowuje pizze: 7
+(pid: 23234, timestamp: 2022-05-10 00:03:18:101)         Wyjęto pizee: 2. Liczba pizz w piecu: 1. Liczba pizz na stole: 0.
+(pid: 23239, timestamp: 2022-05-10 00:03:18:101)         Pobieram pizze: 1. Liczba pizz na stole: 0.
+(pid: 23234, timestamp: 2022-05-10 00:03:18:101)         Pizza umieszczona na stole: 2. Liczba pizz w piecu: 1. Liczba pizz na stole: 1.
+(pid: 23234, timestamp: 2022-05-10 00:03:18:101)         Przygotowuje pizze: 3
+(pid: 23237, timestamp: 2022-05-10 00:03:18:101)         Pobieram pizze: 2. Liczba pizz na stole: 0.
+(pid: 23232, timestamp: 2022-05-10 00:03:18:101)         Wyjęto pizee: 6. Liczba pizz w piecu: 0. Liczba pizz na stole: 0.
+(pid: 23232, timestamp: 2022-05-10 00:03:18:101)         Pizza umieszczona na stole: 6. Liczba pizz w piecu: 0. Liczba pizz na stole: 1.
+(pid: 23232, timestamp: 2022-05-10 00:03:18:101)         Przygotowuje pizze: 8
+(pid: 23235, timestamp: 2022-05-10 00:03:18:101)         Pobieram pizze: 6. Liczba pizz na stole: 0.
+(pid: 23233, timestamp: 2022-05-10 00:03:19:101)         Dodano pizee: 7. Liczba pizz w piecu: 1.
+(pid: 23234, timestamp: 2022-05-10 00:03:19:101)         Dodano pizee: 3. Liczba pizz w piecu: 2.
+(pid: 23232, timestamp: 2022-05-10 00:03:19:101)         Dodano pizee: 8. Liczba pizz w piecu: 3.
+(pid: 23239, timestamp: 2022-05-10 00:03:22:101)         Dostarczono pizze: 1.
+(pid: 23237, timestamp: 2022-05-10 00:03:22:101)         Dostarczono pizze: 2.
+(pid: 23235, timestamp: 2022-05-10 00:03:22:102)         Dostarczono pizze: 6.
+(pid: 23233, timestamp: 2022-05-10 00:03:23:101)         Wyjęto pizee: 7. Liczba pizz w piecu: 2. Liczba pizz na stole: 0.
+(pid: 23233, timestamp: 2022-05-10 00:03:23:101)         Pizza umieszczona na stole: 7. Liczba pizz w piecu: 2. Liczba pizz na stole: 1.
+(pid: 23233, timestamp: 2022-05-10 00:03:23:101)         Przygotowuje pizze: 2
+(pid: 23234, timestamp: 2022-05-10 00:03:23:101)         Wyjęto pizee: 3. Liczba pizz w piecu: 1. Liczba pizz na stole: 1.
+(pid: 23238, timestamp: 2022-05-10 00:03:23:101)         Pobieram pizze: 7. Liczba pizz na stole: 0.
+(pid: 23234, timestamp: 2022-05-10 00:03:23:101)         Pizza umieszczona na stole: 3. Liczba pizz w piecu: 1. Liczba pizz na stole: 1.
+(pid: 23234, timestamp: 2022-05-10 00:03:23:101)         Przygotowuje pizze: 1
+(pid: 23232, timestamp: 2022-05-10 00:03:23:102)         Wyjęto pizee: 8. Liczba pizz w piecu: 0. Liczba pizz na stole: 0.
+(pid: 23236, timestamp: 2022-05-10 00:03:23:102)         Pobieram pizze: 3. Liczba pizz na stole: 0.
+(pid: 23232, timestamp: 2022-05-10 00:03:23:102)         Pizza umieszczona na stole: 8. Liczba pizz w piecu: 0. Liczba pizz na stole: 1.
+(pid: 23232, timestamp: 2022-05-10 00:03:23:102)         Przygotowuje pizze: 3
+(pid: 23233, timestamp: 2022-05-10 00:03:24:101)         Dodano pizee: 2. Liczba pizz w piecu: 1.
+(pid: 23234, timestamp: 2022-05-10 00:03:24:101)         Dodano pizee: 1. Liczba pizz w piecu: 2.
+(pid: 23232, timestamp: 2022-05-10 00:03:24:102)         Dodano pizee: 3. Liczba pizz w piecu: 3.
+(pid: 23239, timestamp: 2022-05-10 00:03:26:101)         Pobieram pizze: 8. Liczba pizz na stole: 0.
+(pid: 23238, timestamp: 2022-05-10 00:03:27:101)         Dostarczono pizze: 7.
+(pid: 23236, timestamp: 2022-05-10 00:03:27:102)         Dostarczono pizze: 3.
+(pid: 23233, timestamp: 2022-05-10 00:03:28:101)         Wyjęto pizee: 2. Liczba pizz w piecu: 2. Liczba pizz na stole: 0.
+(pid: 23233, timestamp: 2022-05-10 00:03:28:102)         Pizza umieszczona na stole: 2. Liczba pizz w piecu: 2. Liczba pizz na stole: 1.
+(pid: 23233, timestamp: 2022-05-10 00:03:28:102)         Przygotowuje pizze: 3
+(pid: 23237, timestamp: 2022-05-10 00:03:28:102)         Pobieram pizze: 2. Liczba pizz na stole: 0.
+(pid: 23234, timestamp: 2022-05-10 00:03:28:102)         Wyjęto pizee: 1. Liczba pizz w piecu: 1. Liczba pizz na stole: 0.
+(pid: 23234, timestamp: 2022-05-10 00:03:28:102)         Pizza umieszczona na stole: 1. Liczba pizz w piecu: 1. Liczba pizz na stole: 1.
+(pid: 23234, timestamp: 2022-05-10 00:03:28:102)         Przygotowuje pizze: 6
+(pid: 23235, timestamp: 2022-05-10 00:03:28:102)         Pobieram pizze: 1. Liczba pizz na stole: 0.
+(pid: 23232, timestamp: 2022-05-10 00:03:28:102)         Wyjęto pizee: 3. Liczba pizz w piecu: 0. Liczba pizz na stole: 0.
+(pid: 23232, timestamp: 2022-05-10 00:03:28:102)         Pizza umieszczona na stole: 3. Liczba pizz w piecu: 0. Liczba pizz na stole: 1.
+(pid: 23232, timestamp: 2022-05-10 00:03:28:102)         Przygotowuje pizze: 0
+
+
+N = 8 i M = 7
+===============================================================================
+(pid: 23527, timestamp: 2022-05-10 00:04:51:598)         Przygotowuje pizze: 8
+(pid: 23526, timestamp: 2022-05-10 00:04:51:598)         Przygotowuje pizze: 5
+(pid: 23530, timestamp: 2022-05-10 00:04:51:598)         Przygotowuje pizze: 3
+(pid: 23532, timestamp: 2022-05-10 00:04:51:598)         Przygotowuje pizze: 6
+(pid: 23531, timestamp: 2022-05-10 00:04:51:598)         Przygotowuje pizze: 0
+(pid: 23533, timestamp: 2022-05-10 00:04:51:599)         Przygotowuje pizze: 5
+(pid: 23528, timestamp: 2022-05-10 00:04:51:600)         Przygotowuje pizze: 8
+(pid: 23529, timestamp: 2022-05-10 00:04:51:600)         Przygotowuje pizze: 2
+(pid: 23527, timestamp: 2022-05-10 00:04:52:598)         Dodano pizee: 8. Liczba pizz w piecu: 1.
+(pid: 23526, timestamp: 2022-05-10 00:04:52:598)         Dodano pizee: 5. Liczba pizz w piecu: 2.
+(pid: 23530, timestamp: 2022-05-10 00:04:52:598)         Dodano pizee: 3. Liczba pizz w piecu: 3.
+(pid: 23532, timestamp: 2022-05-10 00:04:52:599)         Dodano pizee: 6. Liczba pizz w piecu: 4.
+(pid: 23533, timestamp: 2022-05-10 00:04:52:600)         Dodano pizee: 5. Liczba pizz w piecu: 5.
+(pid: 23527, timestamp: 2022-05-10 00:04:56:598)         Wyjęto pizee: 8. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 23527, timestamp: 2022-05-10 00:04:56:598)         Pizza umieszczona na stole: 8. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 23527, timestamp: 2022-05-10 00:04:56:598)         Przygotowuje pizze: 7
+(pid: 23531, timestamp: 2022-05-10 00:04:56:598)         Dodano pizee: 0. Liczba pizz w piecu: 5.
+(pid: 23526, timestamp: 2022-05-10 00:04:56:598)         Wyjęto pizee: 5. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 23529, timestamp: 2022-05-10 00:04:56:598)         Dodano pizee: 2. Liczba pizz w piecu: 5.
+(pid: 23540, timestamp: 2022-05-10 00:04:56:598)         Pobieram pizze: 8. Liczba pizz na stole: 0.
+(pid: 23526, timestamp: 2022-05-10 00:04:56:598)         Pizza umieszczona na stole: 5. Liczba pizz w piecu: 5. Liczba pizz na stole: 1.
+(pid: 23526, timestamp: 2022-05-10 00:04:56:598)         Przygotowuje pizze: 7
+(pid: 23530, timestamp: 2022-05-10 00:04:56:598)         Wyjęto pizee: 3. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 23528, timestamp: 2022-05-10 00:04:56:599)         Dodano pizee: 8. Liczba pizz w piecu: 5.
+(pid: 23539, timestamp: 2022-05-10 00:04:56:599)         Pobieram pizze: 5. Liczba pizz na stole: 0.
+(pid: 23530, timestamp: 2022-05-10 00:04:56:599)         Pizza umieszczona na stole: 3. Liczba pizz w piecu: 5. Liczba pizz na stole: 1.
+(pid: 23530, timestamp: 2022-05-10 00:04:56:599)         Przygotowuje pizze: 6
+(pid: 23532, timestamp: 2022-05-10 00:04:56:599)         Wyjęto pizee: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 23532, timestamp: 2022-05-10 00:04:56:599)         Pizza umieszczona na stole: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 2.
+(pid: 23532, timestamp: 2022-05-10 00:04:56:599)         Przygotowuje pizze: 6
+(pid: 23534, timestamp: 2022-05-10 00:04:56:599)         Pobieram pizze: 3. Liczba pizz na stole: 1.
+(pid: 23535, timestamp: 2022-05-10 00:04:56:599)         Pobieram pizze: 6. Liczba pizz na stole: 0.
+(pid: 23533, timestamp: 2022-05-10 00:04:56:600)         Wyjęto pizee: 5. Liczba pizz w piecu: 3. Liczba pizz na stole: 0.
+(pid: 23533, timestamp: 2022-05-10 00:04:56:600)         Pizza umieszczona na stole: 5. Liczba pizz w piecu: 3. Liczba pizz na stole: 1.
+(pid: 23533, timestamp: 2022-05-10 00:04:56:600)         Przygotowuje pizze: 6
+(pid: 23537, timestamp: 2022-05-10 00:04:56:600)         Pobieram pizze: 5. Liczba pizz na stole: 0.
+(pid: 23527, timestamp: 2022-05-10 00:04:57:598)         Dodano pizee: 7. Liczba pizz w piecu: 4.
+(pid: 23526, timestamp: 2022-05-10 00:04:57:598)         Dodano pizee: 7. Liczba pizz w piecu: 5.
+(pid: 23531, timestamp: 2022-05-10 00:05:00:598)         Wyjęto pizee: 0. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 23531, timestamp: 2022-05-10 00:05:00:598)         Pizza umieszczona na stole: 0. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 23531, timestamp: 2022-05-10 00:05:00:598)         Przygotowuje pizze: 4
+(pid: 23540, timestamp: 2022-05-10 00:05:00:598)         Dostarczono pizze: 8.
+(pid: 23529, timestamp: 2022-05-10 00:05:00:598)         Wyjęto pizee: 2. Liczba pizz w piecu: 3. Liczba pizz na stole: 1.
+(pid: 23530, timestamp: 2022-05-10 00:05:00:598)         Dodano pizee: 6. Liczba pizz w piecu: 4.
+(pid: 23532, timestamp: 2022-05-10 00:05:00:598)         Dodano pizee: 6. Liczba pizz w piecu: 5.
+(pid: 23536, timestamp: 2022-05-10 00:05:00:598)         Pobieram pizze: 0. Liczba pizz na stole: 0.
+(pid: 23529, timestamp: 2022-05-10 00:05:00:599)         Pizza umieszczona na stole: 2. Liczba pizz w piecu: 5. Liczba pizz na stole: 1.
+(pid: 23529, timestamp: 2022-05-10 00:05:00:599)         Przygotowuje pizze: 7
+(pid: 23528, timestamp: 2022-05-10 00:05:00:599)         Wyjęto pizee: 8. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 23533, timestamp: 2022-05-10 00:05:00:599)         Dodano pizee: 6. Liczba pizz w piecu: 5.
+(pid: 23539, timestamp: 2022-05-10 00:05:00:599)         Dostarczono pizze: 5.
+(pid: 23538, timestamp: 2022-05-10 00:05:00:599)         Pobieram pizze: 2. Liczba pizz na stole: 0.
+(pid: 23528, timestamp: 2022-05-10 00:05:00:599)         Pizza umieszczona na stole: 8. Liczba pizz w piecu: 5. Liczba pizz na stole: 1.
+(pid: 23528, timestamp: 2022-05-10 00:05:00:599)         Przygotowuje pizze: 9
+(pid: 23534, timestamp: 2022-05-10 00:05:00:599)         Dostarczono pizze: 3.
+(pid: 23535, timestamp: 2022-05-10 00:05:00:599)         Dostarczono pizze: 6.
+(pid: 23537, timestamp: 2022-05-10 00:05:00:600)         Dostarczono pizze: 5.
+(pid: 23527, timestamp: 2022-05-10 00:05:01:598)         Wyjęto pizee: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 23527, timestamp: 2022-05-10 00:05:01:598)         Pizza umieszczona na stole: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 2.
+(pid: 23527, timestamp: 2022-05-10 00:05:01:598)         Przygotowuje pizze: 0
+(pid: 23531, timestamp: 2022-05-10 00:05:01:598)         Dodano pizee: 4. Liczba pizz w piecu: 5.
+(pid: 23526, timestamp: 2022-05-10 00:05:01:599)         Wyjęto pizee: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 2.
+(pid: 23526, timestamp: 2022-05-10 00:05:01:599)         Pizza umieszczona na stole: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 3.
+(pid: 23526, timestamp: 2022-05-10 00:05:01:599)         Przygotowuje pizze: 5
+(pid: 23529, timestamp: 2022-05-10 00:05:01:599)         Dodano pizee: 7. Liczba pizz w piecu: 5.
+(pid: 23540, timestamp: 2022-05-10 00:05:04:599)         Pobieram pizze: 8. Liczba pizz na stole: 2.
+(pid: 23530, timestamp: 2022-05-10 00:05:04:599)         Wyjęto pizee: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 2.
+(pid: 23530, timestamp: 2022-05-10 00:05:04:599)         Pizza umieszczona na stole: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 3.
+(pid: 23530, timestamp: 2022-05-10 00:05:04:599)         Przygotowuje pizze: 6
+(pid: 23528, timestamp: 2022-05-10 00:05:04:599)         Dodano pizee: 9. Liczba pizz w piecu: 5.
+(pid: 23532, timestamp: 2022-05-10 00:05:04:599)         Wyjęto pizee: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 3.
+(pid: 23536, timestamp: 2022-05-10 00:05:04:599)         Dostarczono pizze: 0.
+(pid: 23527, timestamp: 2022-05-10 00:05:04:599)         Dodano pizee: 0. Liczba pizz w piecu: 5.
+(pid: 23532, timestamp: 2022-05-10 00:05:04:599)         Pizza umieszczona na stole: 6. Liczba pizz w piecu: 5. Liczba pizz na stole: 4.
+(pid: 23532, timestamp: 2022-05-10 00:05:04:599)         Przygotowuje pizze: 9
+(pid: 23533, timestamp: 2022-05-10 00:05:04:599)         Wyjęto pizee: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 4.
+(pid: 23533, timestamp: 2022-05-10 00:05:04:599)         Pizza umieszczona na stole: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 5.
+(pid: 23533, timestamp: 2022-05-10 00:05:04:599)         Przygotowuje pizze: 4
+(pid: 23526, timestamp: 2022-05-10 00:05:04:599)         Dodano pizee: 5. Liczba pizz w piecu: 5.
+(pid: 23539, timestamp: 2022-05-10 00:05:04:599)         Pobieram pizze: 7. Liczba pizz na stole: 4.
+(pid: 23538, timestamp: 2022-05-10 00:05:04:599)         Dostarczono pizze: 2.
+(pid: 23534, timestamp: 2022-05-10 00:05:04:599)         Pobieram pizze: 7. Liczba pizz na stole: 3.
+(pid: 23535, timestamp: 2022-05-10 00:05:04:599)         Pobieram pizze: 6. Liczba pizz na stole: 2.
+(pid: 23537, timestamp: 2022-05-10 00:05:04:601)         Pobieram pizze: 6. Liczba pizz na stole: 1.
+(pid: 23531, timestamp: 2022-05-10 00:05:05:599)         Wyjęto pizee: 4. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 23531, timestamp: 2022-05-10 00:05:05:599)         Pizza umieszczona na stole: 4. Liczba pizz w piecu: 4. Liczba pizz na stole: 2.
+(pid: 23531, timestamp: 2022-05-10 00:05:05:599)         Przygotowuje pizze: 3
+(pid: 23530, timestamp: 2022-05-10 00:05:05:599)         Dodano pizee: 6. Liczba pizz w piecu: 5.
+(pid: 23529, timestamp: 2022-05-10 00:05:05:599)         Wyjęto pizee: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 2.
+(pid: 23529, timestamp: 2022-05-10 00:05:05:599)         Pizza umieszczona na stole: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 3.
+(pid: 23529, timestamp: 2022-05-10 00:05:05:599)         Przygotowuje pizze: 9
+(pid: 23532, timestamp: 2022-05-10 00:05:05:599)         Dodano pizee: 9. Liczba pizz w piecu: 5.
+(pid: 23540, timestamp: 2022-05-10 00:05:08:599)         Dostarczono pizze: 8.
+(pid: 23528, timestamp: 2022-05-10 00:05:08:599)         Wyjęto pizee: 9. Liczba pizz w piecu: 4. Liczba pizz na stole: 3.
+(pid: 23536, timestamp: 2022-05-10 00:05:08:599)         Pobieram pizze: 6. Liczba pizz na stole: 2.
+(pid: 23533, timestamp: 2022-05-10 00:05:08:599)         Dodano pizee: 4. Liczba pizz w piecu: 5.
+(pid: 23528, timestamp: 2022-05-10 00:05:08:599)         Pizza umieszczona na stole: 9. Liczba pizz w piecu: 4. Liczba pizz na stole: 3.
+(pid: 23527, timestamp: 2022-05-10 00:05:08:599)         Wyjęto pizee: 0. Liczba pizz w piecu: 4. Liczba pizz na stole: 2.
+(pid: 23528, timestamp: 2022-05-10 00:05:08:599)         Przygotowuje pizze: 3
+(pid: 23527, timestamp: 2022-05-10 00:05:08:599)         Pizza umieszczona na stole: 0. Liczba pizz w piecu: 4. Liczba pizz na stole: 4.
+(pid: 23527, timestamp: 2022-05-10 00:05:08:599)         Przygotowuje pizze: 5
+(pid: 23531, timestamp: 2022-05-10 00:05:08:599)         Dodano pizee: 3. Liczba pizz w piecu: 5.
+(pid: 23539, timestamp: 2022-05-10 00:05:08:599)         Dostarczono pizze: 7.
+(pid: 23526, timestamp: 2022-05-10 00:05:08:599)         Wyjęto pizee: 5. Liczba pizz w piecu: 4. Liczba pizz na stole: 4.
+(pid: 23526, timestamp: 2022-05-10 00:05:08:599)         Pizza umieszczona na stole: 5. Liczba pizz w piecu: 4. Liczba pizz na stole: 5.
+(pid: 23526, timestamp: 2022-05-10 00:05:08:599)         Przygotowuje pizze: 0
+(pid: 23529, timestamp: 2022-05-10 00:05:08:599)         Dodano pizee: 9. Liczba pizz w piecu: 5.
+(pid: 23538, timestamp: 2022-05-10 00:05:08:599)         Pobieram pizze: 4. Liczba pizz na stole: 4.
+(pid: 23534, timestamp: 2022-05-10 00:05:08:599)         Dostarczono pizze: 7.
+(pid: 23535, timestamp: 2022-05-10 00:05:08:599)         Dostarczono pizze: 6.
+(pid: 23537, timestamp: 2022-05-10 00:05:08:601)         Dostarczono pizze: 6.
+(pid: 23530, timestamp: 2022-05-10 00:05:09:599)         Wyjęto pizee: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 4.
+(pid: 23530, timestamp: 2022-05-10 00:05:09:599)         Pizza umieszczona na stole: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 5.
+(pid: 23530, timestamp: 2022-05-10 00:05:09:599)         Przygotowuje pizze: 0
+(pid: 23528, timestamp: 2022-05-10 00:05:09:599)         Dodano pizee: 3. Liczba pizz w piecu: 5.
+(pid: 23532, timestamp: 2022-05-10 00:05:09:599)         Wyjęto pizee: 9. Liczba pizz w piecu: 4. Liczba pizz na stole: 5.
+(pid: 23527, timestamp: 2022-05-10 00:05:09:599)         Dodano pizee: 5. Liczba pizz w piecu: 5.
+
+-------------------------------------------------------------------------------
+
+2. Posix
+
+N = 3 i M = 4
+===============================================================================
+(pid: 26758, timestamp: 2022-05-10 00:25:52:893)         Przygotowuje pizze: 0
+(pid: 26757, timestamp: 2022-05-10 00:25:52:894)         Przygotowuje pizze: 0
+(pid: 26756, timestamp: 2022-05-10 00:25:52:895)         Przygotowuje pizze: 8
+(pid: 26758, timestamp: 2022-05-10 00:25:53:894)         Dodano pizee: 0. Liczba pizz w piecu: 1.
+(pid: 26757, timestamp: 2022-05-10 00:25:53:894)         Dodano pizee: 0. Liczba pizz w piecu: 2.
+(pid: 26756, timestamp: 2022-05-10 00:25:53:895)         Dodano pizee: 8. Liczba pizz w piecu: 3.
+(pid: 26758, timestamp: 2022-05-10 00:25:57:894)         Wyjęto pizee: 0. Liczba pizz w piecu: 2. Liczba pizz na stole: 0.
+(pid: 26758, timestamp: 2022-05-10 00:25:57:894)         Pizza umieszczona na stole: 0. Liczba pizz w piecu: 2. Liczba pizz na stole: 1.
+(pid: 26758, timestamp: 2022-05-10 00:25:57:894)         Przygotowuje pizze: 2
+(pid: 26759, timestamp: 2022-05-10 00:25:57:894)         Pobieram pizze: 0. Liczba pizz na stole: 0.
+(pid: 26757, timestamp: 2022-05-10 00:25:57:894)         Wyjęto pizee: 0. Liczba pizz w piecu: 1. Liczba pizz na stole: 0.
+(pid: 26757, timestamp: 2022-05-10 00:25:57:894)         Pizza umieszczona na stole: 0. Liczba pizz w piecu: 1. Liczba pizz na stole: 1.
+(pid: 26757, timestamp: 2022-05-10 00:25:57:894)         Przygotowuje pizze: 0
+(pid: 26760, timestamp: 2022-05-10 00:25:57:894)         Pobieram pizze: 0. Liczba pizz na stole: 0.
+(pid: 26756, timestamp: 2022-05-10 00:25:57:895)         Wyjęto pizee: 8. Liczba pizz w piecu: 0. Liczba pizz na stole: 0.
+(pid: 26756, timestamp: 2022-05-10 00:25:57:895)         Pizza umieszczona na stole: 8. Liczba pizz w piecu: 0. Liczba pizz na stole: 1.
+(pid: 26756, timestamp: 2022-05-10 00:25:57:895)         Przygotowuje pizze: 7
+(pid: 26762, timestamp: 2022-05-10 00:25:57:895)         Pobieram pizze: 8. Liczba pizz na stole: 0.
+(pid: 26758, timestamp: 2022-05-10 00:25:58:894)         Dodano pizee: 2. Liczba pizz w piecu: 1.
+(pid: 26757, timestamp: 2022-05-10 00:25:58:894)         Dodano pizee: 0. Liczba pizz w piecu: 2.
+(pid: 26756, timestamp: 2022-05-10 00:25:58:895)         Dodano pizee: 7. Liczba pizz w piecu: 3.
+(pid: 26759, timestamp: 2022-05-10 00:26:01:894)         Dostarczono pizze: 0.
+(pid: 26760, timestamp: 2022-05-10 00:26:01:894)         Dostarczono pizze: 0.
+(pid: 26762, timestamp: 2022-05-10 00:26:01:895)         Dostarczono pizze: 8.
+(pid: 26758, timestamp: 2022-05-10 00:26:02:894)         Wyjęto pizee: 2. Liczba pizz w piecu: 2. Liczba pizz na stole: 0.
+(pid: 26758, timestamp: 2022-05-10 00:26:02:894)         Pizza umieszczona na stole: 2. Liczba pizz w piecu: 2. Liczba pizz na stole: 1.
+(pid: 26758, timestamp: 2022-05-10 00:26:02:894)         Przygotowuje pizze: 1
+(pid: 26757, timestamp: 2022-05-10 00:26:02:894)         Wyjęto pizee: 0. Liczba pizz w piecu: 1. Liczba pizz na stole: 1.
+(pid: 26757, timestamp: 2022-05-10 00:26:02:894)         Pizza umieszczona na stole: 0. Liczba pizz w piecu: 1. Liczba pizz na stole: 2.
+(pid: 26757, timestamp: 2022-05-10 00:26:02:894)         Przygotowuje pizze: 2
+(pid: 26761, timestamp: 2022-05-10 00:26:02:894)         Pobieram pizze: 2. Liczba pizz na stole: 1.
+(pid: 26756, timestamp: 2022-05-10 00:26:02:895)         Wyjęto pizee: 7. Liczba pizz w piecu: 0. Liczba pizz na stole: 1.
+(pid: 26756, timestamp: 2022-05-10 00:26:02:895)         Pizza umieszczona na stole: 7. Liczba pizz w piecu: 0. Liczba pizz na stole: 2.
+(pid: 26756, timestamp: 2022-05-10 00:26:02:895)         Przygotowuje pizze: 2
+(pid: 26758, timestamp: 2022-05-10 00:26:03:894)         Dodano pizee: 1. Liczba pizz w piecu: 1.
+(pid: 26757, timestamp: 2022-05-10 00:26:03:894)         Dodano pizee: 2. Liczba pizz w piecu: 2.
+(pid: 26756, timestamp: 2022-05-10 00:26:03:895)         Dodano pizee: 2. Liczba pizz w piecu: 3.
+(pid: 26759, timestamp: 2022-05-10 00:26:05:894)         Pobieram pizze: 0. Liczba pizz na stole: 1.
+(pid: 26760, timestamp: 2022-05-10 00:26:05:894)         Pobieram pizze: 7. Liczba pizz na stole: 0.
+(pid: 26761, timestamp: 2022-05-10 00:26:06:894)         Dostarczono pizze: 2.
+(pid: 26758, timestamp: 2022-05-10 00:26:07:894)         Wyjęto pizee: 1. Liczba pizz w piecu: 2. Liczba pizz na stole: 0.
+(pid: 26758, timestamp: 2022-05-10 00:26:07:894)         Pizza umieszczona na stole: 1. Liczba pizz w piecu: 2. Liczba pizz na stole: 1.
+(pid: 26758, timestamp: 2022-05-10 00:26:07:894)         Przygotowuje pizze: 5
+(pid: 26757, timestamp: 2022-05-10 00:26:07:894)         Wyjęto pizee: 2. Liczba pizz w piecu: 1. Liczba pizz na stole: 1.
+(pid: 26757, timestamp: 2022-05-10 00:26:07:894)         Pizza umieszczona na stole: 2. Liczba pizz w piecu: 1. Liczba pizz na stole: 2.
+(pid: 26757, timestamp: 2022-05-10 00:26:07:895)         Przygotowuje pizze: 5
+(pid: 26762, timestamp: 2022-05-10 00:26:07:895)         Pobieram pizze: 1. Liczba pizz na stole: 1.
+(pid: 26756, timestamp: 2022-05-10 00:26:07:895)         Wyjęto pizee: 2. Liczba pizz w piecu: 0. Liczba pizz na stole: 1.
+(pid: 26756, timestamp: 2022-05-10 00:26:07:895)         Pizza umieszczona na stole: 2. Liczba pizz w piecu: 0. Liczba pizz na stole: 2.
+(pid: 26756, timestamp: 2022-05-10 00:26:07:896)         Przygotowuje pizze: 4
+(pid: 26758, timestamp: 2022-05-10 00:26:08:895)         Dodano pizee: 5. Liczba pizz w piecu: 1.
+(pid: 26757, timestamp: 2022-05-10 00:26:08:895)         Dodano pizee: 5. Liczba pizz w piecu: 2.
+(pid: 26756, timestamp: 2022-05-10 00:26:08:896)         Dodano pizee: 4. Liczba pizz w piecu: 3.
+(pid: 26759, timestamp: 2022-05-10 00:26:09:894)         Dostarczono pizze: 0.
+(pid: 26760, timestamp: 2022-05-10 00:26:09:894)         Dostarczono pizze: 7.
+(pid: 26761, timestamp: 2022-05-10 00:26:10:895)         Pobieram pizze: 2. Liczba pizz na stole: 1.
+(pid: 26762, timestamp: 2022-05-10 00:26:11:895)         Dostarczono pizze: 1.
+(pid: 26758, timestamp: 2022-05-10 00:26:12:895)         Wyjęto pizee: 5. Liczba pizz w piecu: 2. Liczba pizz na stole: 1.
+(pid: 26758, timestamp: 2022-05-10 00:26:12:895)         Pizza umieszczona na stole: 5. Liczba pizz w piecu: 2. Liczba pizz na stole: 2.
+(pid: 26758, timestamp: 2022-05-10 00:26:12:895)         Przygotowuje pizze: 2
+(pid: 26757, timestamp: 2022-05-10 00:26:12:895)         Wyjęto pizee: 5. Liczba pizz w piecu: 1. Liczba pizz na stole: 2.
+(pid: 26757, timestamp: 2022-05-10 00:26:12:895)         Pizza umieszczona na stole: 5. Liczba pizz w piecu: 1. Liczba pizz na stole: 3.
+(pid: 26757, timestamp: 2022-05-10 00:26:12:895)         Przygotowuje pizze: 7
+(pid: 26756, timestamp: 2022-05-10 00:26:12:896)         Wyjęto pizee: 4. Liczba pizz w piecu: 0. Liczba pizz na stole: 3.
+(pid: 26756, timestamp: 2022-05-10 00:26:12:896)         Pizza umieszczona na stole: 4. Liczba pizz w piecu: 0. Liczba pizz na stole: 4.
+(pid: 26756, timestamp: 2022-05-10 00:26:12:896)         Przygotowuje pizze: 5
+(pid: 26759, timestamp: 2022-05-10 00:26:13:894)         Pobieram pizze: 2. Liczba pizz na stole: 3.
+(pid: 26760, timestamp: 2022-05-10 00:26:13:895)         Pobieram pizze: 5. Liczba pizz na stole: 2.
+(pid: 26758, timestamp: 2022-05-10 00:26:13:895)         Dodano pizee: 2. Liczba pizz w piecu: 1.
+(pid: 26757, timestamp: 2022-05-10 00:26:13:895)         Dodano pizee: 7. Liczba pizz w piecu: 2.
+(pid: 26756, timestamp: 2022-05-10 00:26:13:896)         Dodano pizee: 5. Liczba pizz w piecu: 3.
+
+
+N = 10 i M = 10
+===============================================================================
+(pid: 26976, timestamp: 2022-05-10 00:27:15:153)         Przygotowuje pizze: 6
+(pid: 26977, timestamp: 2022-05-10 00:27:15:154)         Przygotowuje pizze: 4
+(pid: 26979, timestamp: 2022-05-10 00:27:15:154)         Przygotowuje pizze: 3
+(pid: 26983, timestamp: 2022-05-10 00:27:15:154)         Przygotowuje pizze: 1
+(pid: 26982, timestamp: 2022-05-10 00:27:15:155)         Przygotowuje pizze: 2
+(pid: 26980, timestamp: 2022-05-10 00:27:15:158)         Przygotowuje pizze: 8
+(pid: 26978, timestamp: 2022-05-10 00:27:15:158)         Przygotowuje pizze: 7
+(pid: 26984, timestamp: 2022-05-10 00:27:15:155)         Przygotowuje pizze: 7
+(pid: 26985, timestamp: 2022-05-10 00:27:15:156)         Przygotowuje pizze: 7
+(pid: 26981, timestamp: 2022-05-10 00:27:15:157)         Przygotowuje pizze: 7
+(pid: 26976, timestamp: 2022-05-10 00:27:16:154)         Dodano pizee: 6. Liczba pizz w piecu: 1.
+(pid: 26977, timestamp: 2022-05-10 00:27:16:154)         Dodano pizee: 4. Liczba pizz w piecu: 2.
+(pid: 26979, timestamp: 2022-05-10 00:27:16:154)         Dodano pizee: 3. Liczba pizz w piecu: 3.
+(pid: 26983, timestamp: 2022-05-10 00:27:16:157)         Dodano pizee: 1. Liczba pizz w piecu: 4.
+(pid: 26982, timestamp: 2022-05-10 00:27:16:157)         Dodano pizee: 2. Liczba pizz w piecu: 5.
+(pid: 26976, timestamp: 2022-05-10 00:27:20:154)         Wyjęto pizee: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26976, timestamp: 2022-05-10 00:27:20:154)         Pizza umieszczona na stole: 6. Liczba pizz w piecu: 3. Liczba pizz na stole: 1.
+(pid: 26977, timestamp: 2022-05-10 00:27:20:154)         Wyjęto pizee: 4. Liczba pizz w piecu: 3. Liczba pizz na stole: 1.
+(pid: 26976, timestamp: 2022-05-10 00:27:20:154)         Przygotowuje pizze: 5
+(pid: 26977, timestamp: 2022-05-10 00:27:20:154)         Pizza umieszczona na stole: 4. Liczba pizz w piecu: 3. Liczba pizz na stole: 2.
+(pid: 26977, timestamp: 2022-05-10 00:27:20:154)         Przygotowuje pizze: 3
+(pid: 26980, timestamp: 2022-05-10 00:27:20:154)         Dodano pizee: 8. Liczba pizz w piecu: 4.
+(pid: 26978, timestamp: 2022-05-10 00:27:20:154)         Dodano pizee: 7. Liczba pizz w piecu: 5.
+(pid: 26979, timestamp: 2022-05-10 00:27:20:154)         Wyjęto pizee: 3. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26986, timestamp: 2022-05-10 00:27:20:154)         Pobieram pizze: 6. Liczba pizz na stole: 1.
+(pid: 26979, timestamp: 2022-05-10 00:27:20:154)         Pizza umieszczona na stole: 3. Liczba pizz w piecu: 4. Liczba pizz na stole: 2.
+(pid: 26979, timestamp: 2022-05-10 00:27:20:154)         Przygotowuje pizze: 3
+(pid: 26984, timestamp: 2022-05-10 00:27:20:154)         Dodano pizee: 7. Liczba pizz w piecu: 5.
+(pid: 26987, timestamp: 2022-05-10 00:27:20:154)         Pobieram pizze: 4. Liczba pizz na stole: 1.
+(pid: 26993, timestamp: 2022-05-10 00:27:20:154)         Pobieram pizze: 3. Liczba pizz na stole: 0.
+(pid: 26983, timestamp: 2022-05-10 00:27:20:157)         Wyjęto pizee: 1. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26983, timestamp: 2022-05-10 00:27:20:157)         Pizza umieszczona na stole: 1. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26985, timestamp: 2022-05-10 00:27:20:157)         Dodano pizee: 7. Liczba pizz w piecu: 5.
+(pid: 26983, timestamp: 2022-05-10 00:27:20:157)         Przygotowuje pizze: 6
+(pid: 26992, timestamp: 2022-05-10 00:27:20:157)         Pobieram pizze: 1. Liczba pizz na stole: 0.
+(pid: 26982, timestamp: 2022-05-10 00:27:20:157)         Wyjęto pizee: 2. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26982, timestamp: 2022-05-10 00:27:20:157)         Pizza umieszczona na stole: 2. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26982, timestamp: 2022-05-10 00:27:20:157)         Przygotowuje pizze: 7
+(pid: 26981, timestamp: 2022-05-10 00:27:20:157)         Dodano pizee: 7. Liczba pizz w piecu: 5.
+(pid: 26988, timestamp: 2022-05-10 00:27:20:157)         Pobieram pizze: 2. Liczba pizz na stole: 0.
+(pid: 26980, timestamp: 2022-05-10 00:27:24:154)         Wyjęto pizee: 8. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26976, timestamp: 2022-05-10 00:27:24:154)         Dodano pizee: 5. Liczba pizz w piecu: 5.
+(pid: 26980, timestamp: 2022-05-10 00:27:24:154)         Pizza umieszczona na stole: 8. Liczba pizz w piecu: 5. Liczba pizz na stole: 1.
+(pid: 26986, timestamp: 2022-05-10 00:27:24:154)         Dostarczono pizze: 6.
+(pid: 26980, timestamp: 2022-05-10 00:27:24:154)         Przygotowuje pizze: 1
+(pid: 26978, timestamp: 2022-05-10 00:27:24:154)         Wyjęto pizee: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26984, timestamp: 2022-05-10 00:27:24:154)         Wyjęto pizee: 7. Liczba pizz w piecu: 3. Liczba pizz na stole: 0.
+(pid: 26977, timestamp: 2022-05-10 00:27:24:154)         Dodano pizee: 3. Liczba pizz w piecu: 4.
+(pid: 26990, timestamp: 2022-05-10 00:27:24:154)         Pobieram pizze: 8. Liczba pizz na stole: 0.
+(pid: 26979, timestamp: 2022-05-10 00:27:24:154)         Dodano pizee: 3. Liczba pizz w piecu: 5.
+(pid: 26978, timestamp: 2022-05-10 00:27:24:154)         Pizza umieszczona na stole: 7. Liczba pizz w piecu: 5. Liczba pizz na stole: 1.
+(pid: 26978, timestamp: 2022-05-10 00:27:24:154)         Przygotowuje pizze: 6
+(pid: 26984, timestamp: 2022-05-10 00:27:24:154)         Pizza umieszczona na stole: 7. Liczba pizz w piecu: 5. Liczba pizz na stole: 2.
+(pid: 26984, timestamp: 2022-05-10 00:27:24:154)         Przygotowuje pizze: 2
+(pid: 26987, timestamp: 2022-05-10 00:27:24:154)         Dostarczono pizze: 4.
+(pid: 26995, timestamp: 2022-05-10 00:27:24:154)         Pobieram pizze: 7. Liczba pizz na stole: 1.
+(pid: 26993, timestamp: 2022-05-10 00:27:24:155)         Dostarczono pizze: 3.
+(pid: 26989, timestamp: 2022-05-10 00:27:24:155)         Pobieram pizze: 7. Liczba pizz na stole: 0.
+(pid: 26985, timestamp: 2022-05-10 00:27:24:157)         Wyjęto pizee: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26985, timestamp: 2022-05-10 00:27:24:157)         Pizza umieszczona na stole: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26985, timestamp: 2022-05-10 00:27:24:157)         Przygotowuje pizze: 3
+(pid: 26983, timestamp: 2022-05-10 00:27:24:157)         Dodano pizee: 6. Liczba pizz w piecu: 5.
+(pid: 26992, timestamp: 2022-05-10 00:27:24:157)         Dostarczono pizze: 1.
+(pid: 26994, timestamp: 2022-05-10 00:27:24:157)         Pobieram pizze: 7. Liczba pizz na stole: 0.
+(pid: 26981, timestamp: 2022-05-10 00:27:24:157)         Wyjęto pizee: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26981, timestamp: 2022-05-10 00:27:24:157)         Pizza umieszczona na stole: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26981, timestamp: 2022-05-10 00:27:24:157)         Przygotowuje pizze: 9
+(pid: 26988, timestamp: 2022-05-10 00:27:24:157)         Dostarczono pizze: 2.
+(pid: 26982, timestamp: 2022-05-10 00:27:24:157)         Dodano pizee: 7. Liczba pizz w piecu: 5.
+(pid: 26991, timestamp: 2022-05-10 00:27:24:157)         Pobieram pizze: 7. Liczba pizz na stole: 0.
+(pid: 26976, timestamp: 2022-05-10 00:27:28:154)         Wyjęto pizee: 5. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26976, timestamp: 2022-05-10 00:27:28:154)         Pizza umieszczona na stole: 5. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26976, timestamp: 2022-05-10 00:27:28:154)         Przygotowuje pizze: 2
+(pid: 26980, timestamp: 2022-05-10 00:27:28:154)         Dodano pizee: 1. Liczba pizz w piecu: 5.
+(pid: 26986, timestamp: 2022-05-10 00:27:28:154)         Pobieram pizze: 5. Liczba pizz na stole: 0.
+(pid: 26977, timestamp: 2022-05-10 00:27:28:154)         Wyjęto pizee: 3. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26977, timestamp: 2022-05-10 00:27:28:154)         Pizza umieszczona na stole: 3. Liczba pizz w piecu: 3. Liczba pizz na stole: 1.
+(pid: 26979, timestamp: 2022-05-10 00:27:28:154)         Wyjęto pizee: 3. Liczba pizz w piecu: 3. Liczba pizz na stole: 0.
+(pid: 26977, timestamp: 2022-05-10 00:27:28:154)         Przygotowuje pizze: 7
+(pid: 26979, timestamp: 2022-05-10 00:27:28:154)         Pizza umieszczona na stole: 3. Liczba pizz w piecu: 3. Liczba pizz na stole: 2.
+(pid: 26979, timestamp: 2022-05-10 00:27:28:154)         Przygotowuje pizze: 8
+(pid: 26978, timestamp: 2022-05-10 00:27:28:154)         Dodano pizee: 6. Liczba pizz w piecu: 4.
+(pid: 26990, timestamp: 2022-05-10 00:27:28:154)         Dostarczono pizze: 8.
+(pid: 26984, timestamp: 2022-05-10 00:27:28:155)         Dodano pizee: 2. Liczba pizz w piecu: 5.
+(pid: 26987, timestamp: 2022-05-10 00:27:28:155)         Pobieram pizze: 3. Liczba pizz na stole: 1.
+(pid: 26995, timestamp: 2022-05-10 00:27:28:155)         Dostarczono pizze: 7.
+(pid: 26993, timestamp: 2022-05-10 00:27:28:155)         Pobieram pizze: 3. Liczba pizz na stole: 0.
+(pid: 26989, timestamp: 2022-05-10 00:27:28:155)         Dostarczono pizze: 7.
+(pid: 26983, timestamp: 2022-05-10 00:27:28:157)         Wyjęto pizee: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26983, timestamp: 2022-05-10 00:27:28:157)         Pizza umieszczona na stole: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26983, timestamp: 2022-05-10 00:27:28:157)         Przygotowuje pizze: 9
+(pid: 26992, timestamp: 2022-05-10 00:27:28:157)         Pobieram pizze: 6. Liczba pizz na stole: 0.
+(pid: 26985, timestamp: 2022-05-10 00:27:28:157)         Dodano pizee: 3. Liczba pizz w piecu: 5.
+(pid: 26994, timestamp: 2022-05-10 00:27:28:157)         Dostarczono pizze: 7.
+(pid: 26982, timestamp: 2022-05-10 00:27:28:158)         Wyjęto pizee: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26982, timestamp: 2022-05-10 00:27:28:158)         Pizza umieszczona na stole: 7. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26982, timestamp: 2022-05-10 00:27:28:158)         Przygotowuje pizze: 2
+(pid: 26988, timestamp: 2022-05-10 00:27:28:158)         Pobieram pizze: 7. Liczba pizz na stole: 0.
+(pid: 26981, timestamp: 2022-05-10 00:27:28:158)         Dodano pizee: 9. Liczba pizz w piecu: 5.
+(pid: 26991, timestamp: 2022-05-10 00:27:28:158)         Dostarczono pizze: 7.
+(pid: 26980, timestamp: 2022-05-10 00:27:32:154)         Wyjęto pizee: 1. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26986, timestamp: 2022-05-10 00:27:32:155)         Dostarczono pizze: 5.
+(pid: 26980, timestamp: 2022-05-10 00:27:32:155)         Pizza umieszczona na stole: 1. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26980, timestamp: 2022-05-10 00:27:32:155)         Przygotowuje pizze: 9
+(pid: 26976, timestamp: 2022-05-10 00:27:32:155)         Dodano pizee: 2. Liczba pizz w piecu: 5.
+(pid: 26984, timestamp: 2022-05-10 00:27:32:155)         Wyjęto pizee: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26990, timestamp: 2022-05-10 00:27:32:155)         Pobieram pizze: 1. Liczba pizz na stole: 0.
+(pid: 26984, timestamp: 2022-05-10 00:27:32:155)         Pizza umieszczona na stole: 6. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26984, timestamp: 2022-05-10 00:27:32:155)         Przygotowuje pizze: 1
+(pid: 26979, timestamp: 2022-05-10 00:27:32:155)         Dodano pizee: 8. Liczba pizz w piecu: 5.
+(pid: 26995, timestamp: 2022-05-10 00:27:32:155)         Pobieram pizze: 6. Liczba pizz na stole: 0.
+(pid: 26987, timestamp: 2022-05-10 00:27:32:155)         Dostarczono pizze: 3.
+(pid: 26978, timestamp: 2022-05-10 00:27:32:155)         Wyjęto pizee: 2. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26977, timestamp: 2022-05-10 00:27:32:155)         Dodano pizee: 7. Liczba pizz w piecu: 5.
+(pid: 26978, timestamp: 2022-05-10 00:27:32:155)         Pizza umieszczona na stole: 2. Liczba pizz w piecu: 5. Liczba pizz na stole: 1.
+(pid: 26978, timestamp: 2022-05-10 00:27:32:155)         Przygotowuje pizze: 2
+(pid: 26993, timestamp: 2022-05-10 00:27:32:155)         Dostarczono pizze: 3.
+(pid: 26989, timestamp: 2022-05-10 00:27:32:155)         Pobieram pizze: 2. Liczba pizz na stole: 0.
+(pid: 26985, timestamp: 2022-05-10 00:27:32:157)         Wyjęto pizee: 3. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26992, timestamp: 2022-05-10 00:27:32:157)         Dostarczono pizze: 6.
+(pid: 26985, timestamp: 2022-05-10 00:27:32:157)         Pizza umieszczona na stole: 3. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26985, timestamp: 2022-05-10 00:27:32:157)         Przygotowuje pizze: 8
+(pid: 26983, timestamp: 2022-05-10 00:27:32:157)         Dodano pizee: 9. Liczba pizz w piecu: 5.
+(pid: 26994, timestamp: 2022-05-10 00:27:32:157)         Pobieram pizze: 3. Liczba pizz na stole: 0.
+(pid: 26981, timestamp: 2022-05-10 00:27:32:158)         Wyjęto pizee: 9. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26981, timestamp: 2022-05-10 00:27:32:158)         Pizza umieszczona na stole: 9. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26981, timestamp: 2022-05-10 00:27:32:158)         Przygotowuje pizze: 5
+(pid: 26982, timestamp: 2022-05-10 00:27:32:158)         Dodano pizee: 2. Liczba pizz w piecu: 5.
+(pid: 26991, timestamp: 2022-05-10 00:27:32:158)         Pobieram pizze: 9. Liczba pizz na stole: 0.
+(pid: 26988, timestamp: 2022-05-10 00:27:32:158)         Dostarczono pizze: 7.
+(pid: 26976, timestamp: 2022-05-10 00:27:36:155)         Wyjęto pizee: 2. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26990, timestamp: 2022-05-10 00:27:36:155)         Dostarczono pizze: 1.
+(pid: 26976, timestamp: 2022-05-10 00:27:36:155)         Pizza umieszczona na stole: 2. Liczba pizz w piecu: 3. Liczba pizz na stole: 1.
+(pid: 26979, timestamp: 2022-05-10 00:27:36:155)         Wyjęto pizee: 8. Liczba pizz w piecu: 3. Liczba pizz na stole: 0.
+(pid: 26995, timestamp: 2022-05-10 00:27:36:155)         Dostarczono pizze: 6.
+(pid: 26976, timestamp: 2022-05-10 00:27:36:155)         Przygotowuje pizze: 1
+(pid: 26979, timestamp: 2022-05-10 00:27:36:155)         Pizza umieszczona na stole: 8. Liczba pizz w piecu: 3. Liczba pizz na stole: 2.
+(pid: 26979, timestamp: 2022-05-10 00:27:36:155)         Przygotowuje pizze: 9
+(pid: 26986, timestamp: 2022-05-10 00:27:36:155)         Pobieram pizze: 2. Liczba pizz na stole: 1.
+(pid: 26980, timestamp: 2022-05-10 00:27:36:155)         Dodano pizee: 9. Liczba pizz w piecu: 4.
+(pid: 26987, timestamp: 2022-05-10 00:27:36:155)         Pobieram pizze: 8. Liczba pizz na stole: 0.
+(pid: 26977, timestamp: 2022-05-10 00:27:36:155)         Wyjęto pizee: 7. Liczba pizz w piecu: 3. Liczba pizz na stole: 0.
+(pid: 26977, timestamp: 2022-05-10 00:27:36:155)         Pizza umieszczona na stole: 7. Liczba pizz w piecu: 3. Liczba pizz na stole: 1.
+(pid: 26977, timestamp: 2022-05-10 00:27:36:155)         Przygotowuje pizze: 8
+(pid: 26989, timestamp: 2022-05-10 00:27:36:155)         Dostarczono pizze: 2.
+(pid: 26978, timestamp: 2022-05-10 00:27:36:155)         Dodano pizee: 2. Liczba pizz w piecu: 4.
+(pid: 26993, timestamp: 2022-05-10 00:27:36:155)         Pobieram pizze: 7. Liczba pizz na stole: 0.
+(pid: 26984, timestamp: 2022-05-10 00:27:36:155)         Dodano pizee: 1. Liczba pizz w piecu: 5.
+(pid: 26983, timestamp: 2022-05-10 00:27:36:157)         Wyjęto pizee: 9. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26983, timestamp: 2022-05-10 00:27:36:158)         Pizza umieszczona na stole: 9. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26994, timestamp: 2022-05-10 00:27:36:158)         Dostarczono pizze: 3.
+(pid: 26983, timestamp: 2022-05-10 00:27:36:158)         Przygotowuje pizze: 0
+(pid: 26985, timestamp: 2022-05-10 00:27:36:158)         Dodano pizee: 8. Liczba pizz w piecu: 5.
+(pid: 26992, timestamp: 2022-05-10 00:27:36:158)         Pobieram pizze: 9. Liczba pizz na stole: 0.
+(pid: 26982, timestamp: 2022-05-10 00:27:36:158)         Wyjęto pizee: 2. Liczba pizz w piecu: 4. Liczba pizz na stole: 0.
+(pid: 26982, timestamp: 2022-05-10 00:27:36:158)         Pizza umieszczona na stole: 2. Liczba pizz w piecu: 4. Liczba pizz na stole: 1.
+(pid: 26982, timestamp: 2022-05-10 00:27:36:158)         Przygotowuje pizze: 3
+(pid: 26991, timestamp: 2022-05-10 00:27:36:158)         Dostarczono pizze: 9.
+(pid: 26981, timestamp: 2022-05-10 00:27:36:158)         Dodano pizee: 5. Liczba pizz w piecu: 5.
+(pid: 26988, timestamp: 2022-05-10 00:27:36:158)         Pobieram pizze: 2. Liczba pizz na stole: 0.
