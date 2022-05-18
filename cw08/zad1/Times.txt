@@ -1,0 +1,321 @@
+Obie metody numbers i block zostały przetestowane. Po wynikach można zauważyć, że wolniejsza jest metoda numbers,
+ponieważ każdy wątek przegląda cały obraz w poszukiwaniu pikseli z odpowiedniego przedziału w którym jest.
+Jeśli chodzi o metodę block to w niej każdy wątek ma przydzieloną część obrazu za którą jest odpowiedzialny. Wtedy
+każdy wątek przekląda tylko swoją część dzięki czemu ta metoda jest szybsza i oszczędza więcej czasu. Przy większej
+liczbie wątków całkowity czas jest dłuższy, ponieważ trzeba utworzyć i zakończyć poszczególne wątki, jednak
+poszczególne wątki wykonywały się coraz szybciej wraz z ich wzrostem.
+
+
+#############TESTY#############
+-----------------------------
+Number of threads: 5
+Method name: numbers
+Thread number: 0	Time: 897
+Thread number: 1	Time: 1277
+Thread number: 2	Time: 1760
+Thread number: 3	Time: 1662
+Thread number: 4	Time: 929
+Total time is: 2925 μs
+-----------------------------
+Number of threads: 5
+Method name: block
+Thread number: 0	Time: 574
+Thread number: 1	Time: 244
+Thread number: 2	Time: 243
+Thread number: 3	Time: 214
+Thread number: 4	Time: 352
+Total time is: 842 μs
+-----------------------------
+Number of threads: 1
+Method name: numbers
+Thread number: 0	Time: 1335
+Total time is: 1738 μs
+-----------------------------
+Number of threads: 1
+Method name: block
+Thread number: 0	Time: 1054
+Total time is: 1353 μs
+-----------------------------
+Number of threads: 100
+Method name: numbers
+Thread number: 0	Time: 909
+Thread number: 1	Time: 839
+Thread number: 2	Time: 801
+Thread number: 3	Time: 795
+Thread number: 4	Time: 1693
+Thread number: 5	Time: 789
+Thread number: 6	Time: 786
+Thread number: 7	Time: 793
+Thread number: 8	Time: 792
+Thread number: 9	Time: 839
+Thread number: 10	Time: 794
+Thread number: 11	Time: 793
+Thread number: 12	Time: 809
+Thread number: 13	Time: 798
+Thread number: 14	Time: 802
+Thread number: 15	Time: 804
+Thread number: 16	Time: 808
+Thread number: 17	Time: 844
+Thread number: 18	Time: 817
+Thread number: 19	Time: 829
+Thread number: 20	Time: 824
+Thread number: 21	Time: 4485
+Thread number: 22	Time: 843
+Thread number: 23	Time: 845
+Thread number: 24	Time: 3456
+Thread number: 25	Time: 5177
+Thread number: 26	Time: 871
+Thread number: 27	Time: 2882
+Thread number: 28	Time: 899
+Thread number: 29	Time: 902
+Thread number: 30	Time: 1713
+Thread number: 31	Time: 947
+Thread number: 32	Time: 932
+Thread number: 33	Time: 951
+Thread number: 34	Time: 960
+Thread number: 35	Time: 4395
+Thread number: 36	Time: 5585
+Thread number: 37	Time: 988
+Thread number: 38	Time: 1003
+Thread number: 39	Time: 1012
+Thread number: 40	Time: 1009
+Thread number: 41	Time: 1040
+Thread number: 42	Time: 1053
+Thread number: 43	Time: 1060
+Thread number: 44	Time: 1077
+Thread number: 45	Time: 1067
+Thread number: 46	Time: 1099
+Thread number: 47	Time: 1103
+Thread number: 48	Time: 1122
+Thread number: 49	Time: 1139
+Thread number: 50	Time: 1145
+Thread number: 51	Time: 4256
+Thread number: 52	Time: 1149
+Thread number: 53	Time: 1153
+Thread number: 54	Time: 1162
+Thread number: 55	Time: 1177
+Thread number: 56	Time: 1172
+Thread number: 57	Time: 1182
+Thread number: 58	Time: 9996
+Thread number: 59	Time: 7358
+Thread number: 60	Time: 1212
+Thread number: 61	Time: 1191
+Thread number: 62	Time: 3880
+Thread number: 63	Time: 1264
+Thread number: 64	Time: 1284
+Thread number: 65	Time: 1303
+Thread number: 66	Time: 1393
+Thread number: 67	Time: 2649
+Thread number: 68	Time: 1311
+Thread number: 69	Time: 1638
+Thread number: 70	Time: 12239
+Thread number: 71	Time: 1238
+Thread number: 72	Time: 1313
+Thread number: 73	Time: 1275
+Thread number: 74	Time: 1255
+Thread number: 75	Time: 1286
+Thread number: 76	Time: 1834
+Thread number: 77	Time: 5792
+Thread number: 78	Time: 1218
+Thread number: 79	Time: 1209
+Thread number: 80	Time: 1196
+Thread number: 81	Time: 7312
+Thread number: 82	Time: 1182
+Thread number: 83	Time: 1158
+Thread number: 84	Time: 1158
+Thread number: 85	Time: 1127
+Thread number: 86	Time: 9889
+Thread number: 87	Time: 6264
+Thread number: 88	Time: 7113
+Thread number: 89	Time: 1091
+Thread number: 90	Time: 1086
+Thread number: 91	Time: 1055
+Thread number: 92	Time: 4477
+Thread number: 93	Time: 4684
+Thread number: 94	Time: 2277
+Thread number: 95	Time: 3287
+Thread number: 96	Time: 2206
+Thread number: 97	Time: 2898
+Thread number: 98	Time: 2102
+Thread number: 99	Time: 971
+Total time is: 35700 μs
+-----------------------------
+Number of threads: 100
+Method name: block
+Thread number: 0	Time: 47
+Thread number: 1	Time: 43
+Thread number: 2	Time: 13
+Thread number: 3	Time: 144
+Thread number: 4	Time: 11
+Thread number: 5	Time: 24
+Thread number: 6	Time: 13
+Thread number: 7	Time: 11
+Thread number: 8	Time: 12
+Thread number: 9	Time: 72
+Thread number: 10	Time: 26
+Thread number: 11	Time: 13
+Thread number: 12	Time: 31
+Thread number: 13	Time: 11
+Thread number: 14	Time: 12
+Thread number: 15	Time: 11
+Thread number: 16	Time: 11
+Thread number: 17	Time: 11
+Thread number: 18	Time: 11
+Thread number: 19	Time: 11
+Thread number: 20	Time: 12
+Thread number: 21	Time: 11
+Thread number: 22	Time: 11
+Thread number: 23	Time: 12
+Thread number: 24	Time: 23
+Thread number: 25	Time: 11
+Thread number: 26	Time: 11
+Thread number: 27	Time: 11
+Thread number: 28	Time: 10
+Thread number: 29	Time: 11
+Thread number: 30	Time: 11
+Thread number: 31	Time: 11
+Thread number: 32	Time: 11
+Thread number: 33	Time: 11
+Thread number: 34	Time: 11
+Thread number: 35	Time: 12
+Thread number: 36	Time: 11
+Thread number: 37	Time: 11
+Thread number: 38	Time: 11
+Thread number: 39	Time: 12
+Thread number: 40	Time: 10
+Thread number: 41	Time: 11
+Thread number: 42	Time: 11
+Thread number: 43	Time: 11
+Thread number: 44	Time: 11
+Thread number: 45	Time: 12
+Thread number: 46	Time: 11
+Thread number: 47	Time: 11
+Thread number: 48	Time: 11
+Thread number: 49	Time: 11
+Thread number: 50	Time: 10
+Thread number: 51	Time: 11
+Thread number: 52	Time: 11
+Thread number: 53	Time: 11
+Thread number: 54	Time: 11
+Thread number: 55	Time: 11
+Thread number: 56	Time: 10
+Thread number: 57	Time: 10
+Thread number: 58	Time: 10
+Thread number: 59	Time: 12
+Thread number: 60	Time: 11
+Thread number: 61	Time: 11
+Thread number: 62	Time: 11
+Thread number: 63	Time: 11
+Thread number: 64	Time: 11
+Thread number: 65	Time: 11
+Thread number: 66	Time: 11
+Thread number: 67	Time: 11
+Thread number: 68	Time: 11
+Thread number: 69	Time: 11
+Thread number: 70	Time: 11
+Thread number: 71	Time: 11
+Thread number: 72	Time: 11
+Thread number: 73	Time: 11
+Thread number: 74	Time: 10
+Thread number: 75	Time: 11
+Thread number: 76	Time: 11
+Thread number: 77	Time: 11
+Thread number: 78	Time: 11
+Thread number: 79	Time: 11
+Thread number: 80	Time: 10
+Thread number: 81	Time: 11
+Thread number: 82	Time: 11
+Thread number: 83	Time: 11
+Thread number: 84	Time: 11
+Thread number: 85	Time: 11
+Thread number: 86	Time: 11
+Thread number: 87	Time: 11
+Thread number: 88	Time: 11
+Thread number: 89	Time: 11
+Thread number: 90	Time: 11
+Thread number: 91	Time: 12
+Thread number: 92	Time: 11
+Thread number: 93	Time: 15
+Thread number: 94	Time: 13
+Thread number: 95	Time: 24
+Thread number: 96	Time: 11
+Thread number: 97	Time: 10
+Thread number: 98	Time: 11
+Thread number: 99	Time: 48
+Total time is: 2709 μs
+-----------------------------
+Number of threads: 20
+Method name: numbers
+Thread number: 0	Time: 1074
+Thread number: 1	Time: 1062
+Thread number: 2	Time: 1059
+Thread number: 3	Time: 1543
+Thread number: 4	Time: 1193
+Thread number: 5	Time: 1252
+Thread number: 6	Time: 4262
+Thread number: 7	Time: 4920
+Thread number: 8	Time: 1340
+Thread number: 9	Time: 2481
+Thread number: 10	Time: 2579
+Thread number: 11	Time: 1355
+Thread number: 12	Time: 1267
+Thread number: 13	Time: 1251
+Thread number: 14	Time: 1208
+Thread number: 15	Time: 1167
+Thread number: 16	Time: 1118
+Thread number: 17	Time: 1089
+Thread number: 18	Time: 1042
+Thread number: 19	Time: 978
+Total time is: 8511 μs
+-----------------------------
+Number of threads: 20
+Method name: block
+Thread number: 0	Time: 109
+Thread number: 1	Time: 75
+Thread number: 2	Time: 169
+Thread number: 3	Time: 64
+Thread number: 4	Time: 70
+Thread number: 5	Time: 59
+Thread number: 6	Time: 137
+Thread number: 7	Time: 64
+Thread number: 8	Time: 58
+Thread number: 9	Time: 127
+Thread number: 10	Time: 84
+Thread number: 11	Time: 134
+Thread number: 12	Time: 127
+Thread number: 13	Time: 139
+Thread number: 14	Time: 94
+Thread number: 15	Time: 79
+Thread number: 16	Time: 1067
+Thread number: 17	Time: 132
+Thread number: 18	Time: 68
+Thread number: 19	Time: 75
+Total time is: 2300 μs
+-----------------------------
+Number of threads: 10
+Method name: numbers
+Thread number: 0	Time: 1107
+Thread number: 1	Time: 1775
+Thread number: 2	Time: 1501
+Thread number: 3	Time: 1437
+Thread number: 4	Time: 1961
+Thread number: 5	Time: 2800
+Thread number: 6	Time: 1324
+Thread number: 7	Time: 1244
+Thread number: 8	Time: 1139
+Thread number: 9	Time: 1275
+Total time is: 4388 μs
+-----------------------------
+Number of threads: 10
+Method name: block
+Thread number: 0	Time: 165
+Thread number: 1	Time: 153
+Thread number: 2	Time: 126
+Thread number: 3	Time: 115
+Thread number: 4	Time: 160
+Thread number: 5	Time: 129
+Thread number: 6	Time: 154
+Thread number: 7	Time: 107
+Thread number: 8	Time: 132
+Thread number: 9	Time: 138
+Total time is: 792 μs
