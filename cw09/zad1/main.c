@@ -45,7 +45,7 @@ void santa_function();
 
 void reindeer_function(int *);
 
-void elf_function(int *);
+_Noreturn void elf_function(int *);
 
 void cleanup_elf(void *arg);
 
@@ -175,7 +175,7 @@ void reindeer_function(int *id) {
     pthread_exit((void *) 0);
 }
 
-void elf_function(int *id) {
+_Noreturn void elf_function(int *id) {
     srand((*id + getpid()) << 16);
     pthread_cleanup_push(cleanup_elf, id) ;
             while (1) {
