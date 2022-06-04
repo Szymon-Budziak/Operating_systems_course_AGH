@@ -35,7 +35,7 @@ clean:
 	rm -rf client server socket
 
 help:
-	@echo "To compile all files and run the server: make all."
+	@echo "To compile all files and run the server: make all"
 	@echo "To just compile the server: make server"
 	@echo "To just compile the client: make client"
 	@echo "If you have your server running, then you can run some example clients: make client_1_local,"
@@ -43,4 +43,4 @@ help:
 	@echo "You can also create your own clients: make your_client ARG1=arg1 ARG2=arg2 ARG3=arg3 where"
 	@echo "\targ1 is the name of your client, arg2 is the way to connect to the server and"
 	@echo "\targ3 is server address"
-	@echo "To clean all not necessary files: make clean."
+	@echo "To clean all not necessary files: make clean"

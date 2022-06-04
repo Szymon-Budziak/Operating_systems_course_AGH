@@ -35,13 +35,13 @@ int init_network_socket(char *);
 
 void ping();
 
+int add_client(char *, int);
+
 void remove_client(char *);
 
 int check_messages(int, int);
 
 int get_by_name(char *);
-
-int add_client(char *, int);
 
 int get_opponent(int);
 
@@ -144,9 +144,8 @@ void ping() {
         printf("*PINGING*\n");
         pthread_mutex_lock(&mutex);
         for (int i = 0; i < MAX_PLAYERS; i++) {
-            if (clients[i] != NULL && !clients[i]->online) {
+            if (clients[i] != NULL && !clients[i]->online)
                 remove_client(clients[i]->name);
-            }
         }
         for (int i = 0; i < MAX_PLAYERS; i++) {
             if (clients[i] != NULL) {

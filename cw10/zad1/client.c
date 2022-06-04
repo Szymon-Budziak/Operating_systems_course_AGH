@@ -16,10 +16,12 @@ typedef enum {
     O,
     X
 } object;
+
 typedef struct {
     int move;
     object objects[9];
 } Board;
+
 typedef enum {
     GAME_STARTING,
     WAITING,
@@ -31,11 +33,9 @@ typedef enum {
 
 Board board;
 State state = GAME_STARTING;
-char *command, *arg;
-int server_socket;
+char *command, *arg, *name;
+int server_socket, is_client_O;
 char buffer[MAX_MESSAGE_LENGTH + 1];
-char *name;
-int is_client_O;
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
@@ -60,7 +60,7 @@ object check_winner();
 
 int main(int argc, char *argv[]) {
     if (argc != 4) {
-        perror("Wrong number of arguments.");
+        perror("Wrong number of arguments.\n");
         exit(1);
     }
     char *type, *destination;
@@ -68,12 +68,12 @@ int main(int argc, char *argv[]) {
     type = argv[2];
     destination = argv[3];
     signal(SIGINT, quit);
+
     init_server_connection(type, destination);
     char temp_buffer[MAX_MESSAGE_LENGTH + 1];
     sprintf(temp_buffer, "add: :%s", name);
     send(server_socket, temp_buffer, MAX_MESSAGE_LENGTH, 0);
     listen_server();
-    return 0;
 }
 
 void quit() {
@@ -174,7 +174,6 @@ void play_game() {
                 scanf("%d", &pos);
                 pos--;
             } while (!move(pos));
-
             draw();
             char temp_buffer[MAX_MESSAGE_LENGTH + 1];
             sprintf(temp_buffer, "move:%d:%s", pos, name);
